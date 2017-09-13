@@ -24,7 +24,7 @@ int main( )
 {
     int A[] = { -2, -8, 6, 7, -3, 10, 1, 0, -3, 7 };
 
-    // Printing the filtered array.
+    // Printing the original array.
     std::cout << ">>> Original array  = [ ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );
     std::cout << "], Size = " <<  std::distance( std::begin(A), std::end(A) ) << "\n";
