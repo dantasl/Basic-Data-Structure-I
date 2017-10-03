@@ -146,3 +146,6 @@ int main()
 
     return 0;
 }
+
+/** TODO: deixar todo mundo com a mesma assinatura e funcionando ao chamado da main.
+depois implementar o radix e o shell sort. */
