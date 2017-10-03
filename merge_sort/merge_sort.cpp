@@ -60,15 +60,12 @@ int main()
     std::vector<int> A = { 12, 1, 3, 2, 7, 90, 45, 11, 45 };
     //std::vector<int> A = { 1, 2, 3, 4, 5, 6, 7 };
 
-    // Print original array.
     std::cout << ">>> Original array: ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );
     std::cout << std::endl;
 
-    // Call merge sort on the entire array.
     merge_sort( A, std::begin(A), std::end(A) - 1, compare );
 
-    // Print the result of merge sort.
     std::cout << ">>> Sorted array: ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );
     std::cout << std::endl;
