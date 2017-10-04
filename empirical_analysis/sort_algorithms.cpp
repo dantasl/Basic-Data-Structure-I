@@ -1,4 +1,4 @@
-bool compare( int a, int b ){ return ( a < b ); }
+bool compare( auto a, auto b ){ return ( a < b ); }
 
 template< typename T, typename P, typename Compare >
 void merge(std::vector<T> &A, P begin, P middle, P last, Compare cmp)
@@ -127,6 +127,26 @@ void selection_sort(FwrdIt _begin, FwrdIt _last, Compare cmp )
         }
         std::swap(*it, *current_minimum);    
     }  
+}
+
+template< typename T, typename P, typename Compare >
+void shell_sort(std::vector<T> &A, P begin, P end, Compare cmp)
+{
+    auto gap = A.size()/2;
+    while(gap > 0)
+    {
+        for(auto i = 0; i < A.size() - gap; ++i)
+        {
+            auto temp = A[i];
+            auto j = i;
+            while( j >= gap and cmp( temp, A[j - gap] ) ) // insertion sort part
+            {
+                std::swap(A[j], A[j - gap]);
+                j-=gap;
+            }
+        }
+        gap /= 2;   
+    }   
 }
 
 int main()
