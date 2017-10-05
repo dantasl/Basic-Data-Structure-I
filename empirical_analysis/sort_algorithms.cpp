@@ -5,16 +5,13 @@ void merge(std::vector<T> &A, P begin, P middle, P last, Compare cmp)
 {
     std::vector<T> left_array;
     std::vector<T> right_array;
-
     for (auto i = begin; i <= middle; ++i)
         left_array.push_back(*i);
     for (auto j = middle + 1; j <= last; ++j)
         right_array.push_back(*j);
-
     auto i = left_array.begin();
     auto j = right_array.begin();
     auto to_merge = begin;
-
     while(i != left_array.end() and j != right_array.end())
     {
         if( cmp(*i, *j) )
@@ -22,7 +19,6 @@ void merge(std::vector<T> &A, P begin, P middle, P last, Compare cmp)
         else
             std::swap(*to_merge++, *j++); 
     }
-
     if(i < left_array.end())
     {
         for(; i != left_array.end(); ++i)
@@ -44,8 +40,7 @@ void merge_sort(std::vector<T> &A, P begin, P end, Compare cmp)
         merge_sort(A, begin, middle, cmp);
         merge_sort(A, middle + 1, end, cmp);
         merge(A, begin, middle, end, cmp);
-    }   
-    
+    }    
 }
 
 template< typename FwrdIt, typename Compare >
@@ -115,9 +110,9 @@ void quick_sort(FwrdIt _begin, FwrdIt _last, Compare cmp )
 template< typename FwrdIt, typename Compare >
 void selection_sort(FwrdIt _begin, FwrdIt _last, Compare cmp )
 {
-    auto it = _begin; // points to the beginning of the range
+    auto it = _begin;
     auto j = _begin;
-    for(; it != _last; ++it) //iterates over each member to sort
+    for(; it != _last; ++it)
     {
         auto current_minimum = it;
         for(j = it; j != _last; ++j)
@@ -139,7 +134,7 @@ void shell_sort(std::vector<T> &A, P begin, P end, Compare cmp)
         {
             auto temp = A[i];
             auto j = i;
-            while( j >= gap and cmp( temp, A[j - gap] ) ) // insertion sort part
+            while( j >= gap and cmp( temp, A[j - gap] ) )
             {
                 std::swap(A[j], A[j - gap]);
                 j-=gap;
@@ -149,9 +144,45 @@ void shell_sort(std::vector<T> &A, P begin, P end, Compare cmp)
     }   
 }
 
+template< typename P, typename Compare >
+int get_max_value(P begin, P end, Compare cmp)
+{
+    auto slow = begin;
+    auto fast = begin;
+    for(; fast != end; ++fast)
+    {
+        if( cmp( *slow, *fast ) )   
+            slow = fast;
+    }
+    return *slow;   
+}
+
+template< typename T, typename P, typename Compare >
+void radix_sort(std::vector<T> &A, P begin, P end, Compare cmp)
+{
+    auto max_input = get_max_value(A.begin(), A.end(), cmp);
+    auto len_a = std::distance(A.begin(), A.end());     
+    for (auto radix = 1; max_input/radix > 0; radix *= 10)
+    {
+        int buckets[10] = { 0 };
+        int aux[len_a];  
+        for (auto i = 0; i < len_a; ++i)
+            buckets[ (A[i] / radix) % 10 ]++;    
+        for (auto i = 1; i < 10; ++i)
+            buckets[i] += buckets[i - 1];    
+        for (auto i = len_a - 1; i >= 0; --i)
+        {
+            aux[ buckets[ ( A[i] / radix ) % 10 ] - 1 ] = A[i];
+            buckets[ (A[i]/radix)%10 ]--;
+        }
+        for (auto i = 0; i < len_a; ++i)
+            A[i] = aux[i];        
+    }    
+}
+
 int main()
 {
-    std::vector<int> A = { 12, 1, 3, 2, 7, 90, 45, 11, 45 };
+    std::vector<int> A = { 61, 109, 149, 111, 34, 2, 24, 119, 122, 125, 27, 145 };
     //std::vector<int> A = { 1, 2, 3, 4, 5, 6, 7 };
 
     std::cout << ">>> Original array: ";
@@ -167,5 +198,4 @@ int main()
     return 0;
 }
 
-/** TODO: deixar todo mundo com a mesma assinatura e funcionando ao chamado da main.
-depois implementar o radix e o shell sort. */
+/** TODO: deixar todo mundo com a mesma assinatura e funcionando ao chamado da main.*/
