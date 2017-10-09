@@ -57,14 +57,15 @@ void merge_sort(std::vector<T> &A, P begin, P end, Compare cmp)
 
 int main()
 {
-    std::vector<int> A = { 12, 1, 3, 2, 7, 90, 45, 11, 45 };
+    std::vector<int> A = { 61, 109, 149, 111, 34, 2, 24, 119, 122, 125, 27, 145 };
+    //std::vector<int> A = { 2, 24, 27, 34, 61, 109, 111, 119, 122, 125, 145, 149 };
     //std::vector<int> A = { 1, 2, 3, 4, 5, 6, 7 };
 
     std::cout << ">>> Original array: ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );
     std::cout << std::endl;
 
-    merge_sort( A, std::begin(A), std::end(A) - 1, compare );
+    merge_sort( A, std::begin(A), std::end(A), compare );
 
     std::cout << ">>> Sorted array: ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );

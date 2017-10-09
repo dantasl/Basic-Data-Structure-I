@@ -4,39 +4,40 @@
 #include <iterator> // distance
 #include <algorithm> // copy, swap
 #include <vector>
+using namespace std;
 
 bool compare( int a, int b ){ return ( a < b ); }
 
 template< typename T, typename P, typename Compare >
 void shell_sort(std::vector<T> &A, P begin, P end, Compare cmp)
 {
-	auto gap = A.size()/2;
-	while(gap > 0)
-	{
-		for(auto i = 0; i < A.size() - gap; ++i)
-		{
-			auto temp = A[i];
-			auto j = i;
-			while( j >= gap and cmp( temp, A[j - gap] ) ) // insertion sort part
-	        {
-	            std::swap(A[j], A[j - gap]);
-	            j-=gap;
-	        }
-		}
-		gap /= 2;	
-	}	
+    for (auto gap = A.size()/2; gap > 0; gap /= 2)
+    {
+        for (auto i = gap; i < A.size(); i += 1)
+        {
+            auto temp = A[i];
+            long j;            
+            for (j = i; j >= gap && cmp(temp, A[j - gap]); j -= gap)
+                A[j] = A[j - gap];
+            A[j] = temp;
+        }
+    }
 }
 
 int main()
 {
-    std::vector<int> A = { 61, 109, 149, 111, 34, 2, 24, 119, 122, 125, 27, 145 };
-    //std::vector<int> A = { 1, 2, 3, 4, 5, 6, 7 };
+	random_device rd;
+    mt19937 g(rd());
+	vector<int> A;
+    A.resize(50);
+    iota(A.begin(), A.end(), 1);
+    shuffle(A.begin(), A.end(), g);
 
     std::cout << ">>> Original array: ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );
     std::cout << std::endl;
 
-    shell_sort( A, std::begin(A), std::end(A) - 1, compare );
+    shell_sort( A, std::begin(A), std::end(A), compare );
     
     std::cout << ">>> Sorted array: ";
     std::copy( std::begin(A), std::end(A),  std::ostream_iterator<int>( std::cout, " " ) );
