@@ -5,6 +5,7 @@
 #include <algorithm> // copy, swap
 #include <vector>
 #include <random>
+#include <string>
 
 typedef bool (*Compare)(long, long);
 using It = std::vector<unsigned int>::iterator; //creating an alias

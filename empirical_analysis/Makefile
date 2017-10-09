@@ -24,7 +24,7 @@ init:
 	@mkdir -p $(SRC_DIR)/
 	@mkdir -p $(DOC_DIR)/
 
-sort_algorithms: $(OBJ_DIR)/sort_algorithms.o $(OBJ_DIR)/main.o
+sort_algorithms: $(OBJ_DIR)/sort_algorithms.o $(OBJ_DIR)/build.o $(OBJ_DIR)/main.o
 	@echo "============="
 	@echo "Connecting the target $@"
 	@echo "============="
@@ -34,6 +34,9 @@ sort_algorithms: $(OBJ_DIR)/sort_algorithms.o $(OBJ_DIR)/main.o
 
 $(OBJ_DIR)/sort_algorithms.o: $(SRC_DIR)/sort_algorithms.cpp $(INC_DIR)/sort_algorithms.h
 	$(CC) -c $(CFLAGS) -o $@ $<
+
+$(OBJ_DIR)/build.o: $(SRC_DIR)/build.cpp $(INC_DIR)/build.h
+	$(CC) -c $(CFLAGS) -o $@ $<	
 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
 	$(CC) -c $(CFLAGS) -o $@ $<
