@@ -10,4 +10,6 @@ void build_list(int const argc, char const **argv, vector<sort_functions> &sort_
 
 void build_sample_size(int const argc, char const **argv, unsigned long &sample_max_size, bool &custom_size);
 
+void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_size);
+
 #endif

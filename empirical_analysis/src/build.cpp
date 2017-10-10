@@ -83,7 +83,18 @@ void build_sample_size(int const argc, char const **argv, unsigned long &sample_
 		}	
 	}
 	else if(argc == 1)
-	{		
-		sample_max_size = 1073741824; //equivalent to 2³⁰
+	{	
+		sample_max_size = 1024;	
+		//sample_max_size = 536870912; //equivalent to 2²⁹
+		//sample_max_size = 1073741824;
 	}	
+}
+
+void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_size)
+{
+	random_device rd;
+    mt19937 g(rd());
+    A.resize(sample_max_size);
+	std::iota( A.begin(), A.end(), 1 );	
+	shuffle(A.begin(), A.end(), g); // vector now is unsorted
 }

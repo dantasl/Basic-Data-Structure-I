@@ -119,9 +119,10 @@ void selection_sort(std::vector<unsigned int> &A, It begin, It last, Compare cmp
 
 void shell_sort(std::vector<unsigned int> &A, It begin, It end, Compare cmp)
 {
-    for (auto gap = A.size()/2; gap > 0; gap /= 2)
+    unsigned long distance = std::distance(begin, end + 1);
+    for (auto gap = distance/2; gap > 0; gap /= 2)
     {
-        for (auto i = gap; i < A.size(); i += 1)
+        for (auto i = gap; i < distance; i += 1)
         {
             auto temp = A[i];
             unsigned long j;            
@@ -146,8 +147,8 @@ long int get_max_value(It begin, It end, Compare cmp)
 
 void radix_sort(std::vector<unsigned int> &A, It begin, It end, Compare cmp)
 {
-    long int max_input = get_max_value(A.begin(), A.end(), cmp);
-    auto len_a = std::distance(A.begin(), A.end());     
+    long int max_input = get_max_value(begin, end + 1, cmp);
+    auto len_a = std::distance(begin, end + 1);     
     for (auto radix = 1; max_input/radix > 0; radix *= 10)
     {
         int buckets[10] = { 0 };
