@@ -17,7 +17,7 @@ int main(int const argc, char const **argv)
     vector<sort_functions> sort_list;
     unsigned long max_sample_size = 0, i_size;
     bool flag_custom_size = false;
-    fstream sort_times;
+    ofstream sort_times;
     int i;
 
     /* Building running environment */
@@ -32,34 +32,42 @@ int main(int const argc, char const **argv)
     /* Filling vector with maximum input and random numbers. TODO: crescent and decrescent */
     build_fill_vector(A, max_sample_size);
 
-    sort_times.open("/time/sort_times.csv", ios_base::out);
-    if(sort_times.bad())
-    {
-        cout << "Could not open file!" << endl;
-    }
-    for(i = 0, i_size = 16; i <= 25; ++i, i_size *= 2) //iterates over each function in vector
+    sort_times.open("time/sort_times.csv", ios_base::trunc);
+    sort_times << "Algorithm, Input Size, Average Time" << endl; //writing header
+
+    for(i = 0, i_size = 16; i < 25; ++i, i_size *= 2) //iterates over each function in vector
+    //for(i = 0, i_size = 1; i <= 10; ++i, i_size *= 2)
     {
         for(unsigned int j = 0; j < sort_list.size(); ++j)
         {
             for(int k = 1; k <= 50; ++k)
             {                
                 auto end = sort_list[j] == quick_sort ? A.begin() + i_size : A.begin() + i_size - 1;
-
+                
+                // Calculates running time for each sorting algorithm
+                // ========================================================================================
                 auto start_sort = chrono::steady_clock::now();
                 sort_list[j]( A, A.begin(), end, compare );
                 auto end_sort = chrono::steady_clock::now();
-                
+                // ========================================================================================
+
+                // Calculates moving average for the 50 executions
+                // ========================================================================================
                 auto time_diff = end_sort - start_sort;
                 double time_average = 0.00;
                 time_average = ( chrono::duration <double, milli> (time_diff).count() - time_average )/k + time_average;
-                
-                cout << "Size: " << i_size << " Algorithm: " << j + 1 << " Execution: " << k << " Time: "<< time_average << endl;  
-                shuffle(A.begin(), A.begin() + i_size, g); //shuffle so that the vector is unordered again
+                // ========================================================================================
+
+                cout << "Size: " << i_size << " Algorithm: " << j + 1 << " Execution: " << k << " Time: "<< time_average << endl;
                 cout << "------------------------------------------------------" << endl;
 
+                // When the code reaches the 50th execution, the average can be stored in a file
+                // ========================================================================================
                 if(k == 50)
-                    sort_times << sort_names[j] << " Input size: " << i_size << " Average time: " << time_average << endl;    
+                    sort_times << sort_names[j] << ", " << i_size << ", " << time_average << endl;
+                // ========================================================================================       
             }   
         }    
-    } 
+    }
+    build_plot_graph();
 }
