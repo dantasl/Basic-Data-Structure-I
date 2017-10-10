@@ -98,3 +98,8 @@ void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_
 	std::iota( A.begin(), A.end(), 1 );	
 	shuffle(A.begin(), A.end(), g); // vector now is unsorted
 }
+
+void build_media()
+{
+
+}
