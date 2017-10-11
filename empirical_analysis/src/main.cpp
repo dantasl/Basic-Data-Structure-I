@@ -35,10 +35,11 @@ int main(int const argc, char const **argv)
     sort_times.open("time/sort_times.csv", ios_base::trunc);
     sort_times << "Algorithm, Input Size, Average Time" << endl; //writing header
 
-    for(i = 0, i_size = 16; i < 25; ++i, i_size *= 2) //iterates over each function in vector
-    //for(i = 0, i_size = 1; i <= 10; ++i, i_size *= 2)
+    for(i = 0, i_size = flag_custom_size ? max_sample_size : 16; 
+        i < (flag_custom_size ? 1 : 25 );
+        ++i, i_size = flag_custom_size ? i_size : i_size * 2)
     {
-        for(unsigned int j = 0; j < sort_list.size(); ++j)
+        for(unsigned int j = 0; j < sort_list.size(); ++j) //iterates over each function in vector
         {
             for(int k = 1; k <= 50; ++k)
             {                
@@ -69,5 +70,5 @@ int main(int const argc, char const **argv)
             }   
         }    
     }
-    build_plot_graph();
+    //build_plot_graph();
 }

@@ -8,19 +8,7 @@
 
 void build_list(int const argc, char const **argv, vector<sort_functions> &sort_list, vector<string> &names)
 {
-	if(argc == 1)
-	{
-		sort_list = {
-			insertion_sort, selection_sort, bubble_sort,
-        	quick_sort, merge_sort, shell_sort, radix_sort
-		};
-		names = {
-			"Insertion Sort", "Selection Sort", "Bubble Sort",
-			"Quick Sort", "Merge Sort", "Shell Sort", "Radix Sort (LSD)"
-		};
-	} 
-	else
-	{
+	if(argc > 1){
 		for(int i = 1; i < argc; ++i)
 		{
 			if( strcmp(*(argv + i), "-f") == 0 )
@@ -50,10 +38,19 @@ void build_list(int const argc, char const **argv, vector<sort_functions> &sort_
 						names.push_back("Shell Sort");
 					}
 				}
-				break;	
+				return;	
 			}	
 		}	
 	}
+
+	sort_list = {
+		insertion_sort, selection_sort, bubble_sort,
+        quick_sort, merge_sort, shell_sort, radix_sort
+	};
+	names = {
+		"Insertion Sort", "Selection Sort", "Bubble Sort",
+		"Quick Sort", "Merge Sort", "Shell Sort", "Radix Sort (LSD)"
+	};
 }
 
 /*
@@ -78,16 +75,11 @@ void build_sample_size(int const argc, char const **argv, unsigned long &sample_
 					sample_max_size = atol( *(argv + i + 1) );
 					custom_size = true;
 				}
-				break;
+				return;
 			}
 		}	
 	}
-	else if(argc == 1)
-	{	
-		sample_max_size = 1024;	
-		//sample_max_size = 536870912; //equivalent to 2²⁹
-		//sample_max_size = 1073741824;
-	}	
+	sample_max_size = 536870912; //equivalent to 2²⁹	
 }
 
 void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_size)
