@@ -32,12 +32,12 @@ int main(int const argc, char const **argv)
     /* Filling vector with maximum input and random numbers. TODO: crescent and decrescent */
     build_fill_vector(A, max_sample_size);
 
-    sort_times.open("time/sort_times.csv", ios_base::trunc);
+    sort_times.open("time/sort_times_quicks.csv", ios_base::app | ios_base::out);
     sort_times << "Algorithm, Input Size, Average Time" << endl; //writing header
 
-    for(i = 0, i_size = flag_custom_size ? max_sample_size : 16; 
+    for(i = 0, i_size = flag_custom_size ? max_sample_size : 1; 
         i < (flag_custom_size ? 1 : 25 );
-        ++i, i_size = flag_custom_size ? i_size : i_size * 2)
+        ++i, i_size = flag_custom_size ? i_size : i * 20000)
     {
         for(unsigned int j = 0; j < sort_list.size(); ++j) //iterates over each function in vector
         {

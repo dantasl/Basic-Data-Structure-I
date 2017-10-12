@@ -1,0 +1,17 @@
+Algorithm, Input Size, Average Time
+Quick Sort, 262144, 5.18059
+Shell Sort, 262144, 25.099
+Merge Sort, 262144, 20.3354
+Radix Sort (LSD), 262144, 1.84259
+Quick Sort, 524288, 11.3872
+Shell Sort, 524288, 57.7747
+Merge Sort, 524288, 42.2855
+Radix Sort (LSD), 524288, 3.6117
+Quick Sort, 1048576, 23.5505
+Shell Sort, 1048576, 201.515
+Merge Sort, 1048576, 88.0457
+Radix Sort (LSD), 1048576, 8.40165
+Quick Sort, 2097152, 54.1739
+Shell Sort, 2097152, 552.52
+Merge Sort, 2097152, 179.307
+Radix Sort (LSD), 2097152, 16.7455

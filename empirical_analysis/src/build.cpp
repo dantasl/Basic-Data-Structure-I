@@ -79,7 +79,7 @@ void build_sample_size(int const argc, char const **argv, unsigned long &sample_
 			}
 		}	
 	}
-	sample_max_size = 536870912; //equivalent to 2²⁹	
+	sample_max_size = 500000; //equivalent to 2²⁹	
 }
 
 void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_size)
