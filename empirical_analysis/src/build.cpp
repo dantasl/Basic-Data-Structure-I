@@ -87,7 +87,7 @@ void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_
 	random_device rd;
     mt19937 g(rd());
     A.resize(sample_max_size);
-	std::iota( A.begin(), A.end(), 1 );	
+	iota( A.begin(), A.end(), 1 );	
 	shuffle(A.begin(), A.end(), g); // vector now is unsorted
 }
 

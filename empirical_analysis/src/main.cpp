@@ -59,8 +59,10 @@ int main(int const argc, char const **argv)
                 time_average = ( chrono::duration <double, milli> (time_diff).count() - time_average )/k + time_average;
                 // ========================================================================================
 
-                cout << "Size: " << i_size << " Algorithm: " << j + 1 << " Execution: " << k << " Time: "<< time_average << endl;
+                cout << "Size: " << i_size << " Algorithm: " << sort_names[j] << " Execution: " << k << " Average: "<< time_average << endl;
                 cout << "------------------------------------------------------" << endl;
+
+                shuffle(A.begin(), A.begin() + i_size, g);
 
                 // When the code reaches the 50th execution, the average can be stored in a file
                 // ========================================================================================
