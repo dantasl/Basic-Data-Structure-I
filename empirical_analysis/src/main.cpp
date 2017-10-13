@@ -37,7 +37,7 @@ int main(int const argc, char const **argv)
 
     for(i = 0, i_size = flag_custom_size ? max_sample_size : 1; 
         i < (flag_custom_size ? 1 : 25 );
-        ++i, i_size = flag_custom_size ? i_size : i * 20000)
+        ++i, i_size = flag_custom_size ? i_size : i * 4000)
     {
         for(unsigned int j = 0; j < sort_list.size(); ++j) //iterates over each function in vector
         {
@@ -57,17 +57,26 @@ int main(int const argc, char const **argv)
                 auto time_diff = end_sort - start_sort;
                 double time_average = 0.00;
                 time_average = ( chrono::duration <double, milli> (time_diff).count() - time_average )/k + time_average;
+
+                //Gambi, you may take this after
+                double time_gambi = 0.00;
+                time_gambi = chrono::duration <double, milli> (time_diff).count() + time_gambi;
                 // ========================================================================================
 
-                cout << "Size: " << i_size << " Algorithm: " << sort_names[j] << " Execution: " << k << " Average: "<< time_average << endl;
-                cout << "------------------------------------------------------" << endl;
-
+                // Printing info about execution and making vector unsorted again.
+                // ========================================================================================
+                cout << "Size: |" << i_size << "| Algorithm: |" << sort_names[j] << "| Execution: |" << k 
+                     << "| Average: | " << time_average << "|" << endl;
                 shuffle(A.begin(), A.begin() + i_size, g);
+                cout << "-----------------------------------------------------------------------------" << endl;
+                // ========================================================================================
 
                 // When the code reaches the 50th execution, the average can be stored in a file
                 // ========================================================================================
-                if(k == 50)
+                if(k == 50){
+                    cout << "With time gambi: " << time_gambi/50 << endl;
                     sort_times << sort_names[j] << ", " << i_size << ", " << time_average << endl;
+                }
                 // ========================================================================================       
             }   
         }    
