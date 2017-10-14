@@ -79,7 +79,7 @@ void build_sample_size(int const argc, char const **argv, unsigned long &sample_
 			}
 		}	
 	}
-	sample_max_size = 100000;	
+	sample_max_size = 56000;	
 }
 
 void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_size)
@@ -88,7 +88,7 @@ void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_
     mt19937 g(rd());
     A.resize(sample_max_size);
 	iota( A.begin(), A.end(), 1 );	
-	shuffle(A.begin(), A.end(), g); // vector now is unsorted
+	//shuffle(A.begin(), A.end(), g); // vector now is unsorted
 }
 
 void build_plot_graph()

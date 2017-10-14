@@ -37,7 +37,7 @@ int main(int const argc, char const **argv)
 
     for(i = 0, i_size = flag_custom_size ? max_sample_size : 1; 
         i < (flag_custom_size ? 1 : 25 );
-        ++i, i_size = flag_custom_size ? i_size : i * 4000)
+        ++i, i_size = flag_custom_size ? i_size : i * 2240)
     {
         for(unsigned int j = 0; j < sort_list.size(); ++j) //iterates over each function in vector
         {
@@ -66,8 +66,8 @@ int main(int const argc, char const **argv)
                 // Printing info about execution and making vector unsorted again.
                 // ========================================================================================
                 cout << "Size: |" << i_size << "| Algorithm: |" << sort_names[j] << "| Execution: |" << k 
-                     << "| Average: | " << time_average << "|" << endl;
-                shuffle(A.begin(), A.begin() + i_size, g);
+                     << "| Average: |" << time_average << "|" << endl;
+                //shuffle(A.begin(), A.begin() + i_size, g);
                 cout << "-----------------------------------------------------------------------------" << endl;
                 // ========================================================================================
 
