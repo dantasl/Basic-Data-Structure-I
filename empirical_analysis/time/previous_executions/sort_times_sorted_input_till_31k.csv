@@ -1,0 +1,100 @@
+Algorithm, Input Size, Average Time
+Insertion Sort, 1, 9.36e-06
+Selection Sort, 1, 4.56e-06
+Bubble Sort, 1, 1.4e-06
+Quick Sort, 1, 5.2e-06
+Merge Sort, 1, 1.8e-06
+Shell Sort, 1, 2.54e-06
+Radix Sort (LSD), 1, 2.238e-05
+Insertion Sort, 2240, 0.00205854
+Selection Sort, 2240, 1.4034
+Bubble Sort, 2240, 0.00132322
+Quick Sort, 2240, 2.39118
+Merge Sort, 2240, 0.129771
+Shell Sort, 2240, 0.00777332
+Radix Sort (LSD), 2240, 0.0106824
+Insertion Sort, 4480, 0.00406624
+Selection Sort, 4480, 5.54335
+Bubble Sort, 4480, 0.00253906
+Quick Sort, 4480, 9.51494
+Merge Sort, 4480, 0.264787
+Shell Sort, 4480, 0.0171926
+Radix Sort (LSD), 4480, 0.0211348
+Insertion Sort, 6720, 0.00611276
+Selection Sort, 6720, 12.4467
+Bubble Sort, 6720, 0.00381638
+Quick Sort, 6720, 21.7515
+Merge Sort, 6720, 0.411548
+Shell Sort, 6720, 0.0257793
+Radix Sort (LSD), 6720, 0.0317553
+Insertion Sort, 8960, 0.00813904
+Selection Sort, 8960, 22.109
+Bubble Sort, 8960, 0.00527538
+Quick Sort, 8960, 38.0324
+Merge Sort, 8960, 0.550952
+Shell Sort, 8960, 0.0375004
+Radix Sort (LSD), 8960, 0.042443
+Insertion Sort, 11200, 0.0104092
+Selection Sort, 11200, 34.5153
+Bubble Sort, 11200, 0.0065143
+Quick Sort, 11200, 59.8891
+Merge Sort, 11200, 0.713658
+Shell Sort, 11200, 0.0467541
+Radix Sort (LSD), 11200, 0.0648093
+Insertion Sort, 13440, 0.0122237
+Selection Sort, 13440, 49.9012
+Bubble Sort, 13440, 0.00765316
+Quick Sort, 13440, 86.735
+Merge Sort, 13440, 0.861948
+Shell Sort, 13440, 0.0559857
+Radix Sort (LSD), 13440, 0.0777123
+Insertion Sort, 15680, 0.0143952
+Selection Sort, 15680, 68.3849
+Bubble Sort, 15680, 0.00894804
+Quick Sort, 15680, 117.733
+Merge Sort, 15680, 0.97214
+Shell Sort, 15680, 0.0664609
+Radix Sort (LSD), 15680, 0.102136
+Insertion Sort, 17920, 0.016513
+Selection Sort, 17920, 88.8925
+Bubble Sort, 17920, 0.0160312
+Quick Sort, 17920, 152.584
+Merge Sort, 17920, 1.15162
+Shell Sort, 17920, 0.0811489
+Radix Sort (LSD), 17920, 0.107263
+Insertion Sort, 20160, 0.0183241
+Selection Sort, 20160, 112.259
+Bubble Sort, 20160, 0.0115116
+Quick Sort, 20160, 193.073
+Merge Sort, 20160, 1.31127
+Shell Sort, 20160, 0.0918071
+Radix Sort (LSD), 20160, 0.116874
+Insertion Sort, 22400, 0.0203781
+Selection Sort, 22400, 138.362
+Bubble Sort, 22400, 0.014465
+Quick Sort, 22400, 238.013
+Merge Sort, 22400, 1.45948
+Shell Sort, 22400, 0.101245
+Radix Sort (LSD), 22400, 0.1325
+Insertion Sort, 24640, 0.0224404
+Selection Sort, 24640, 168.171
+Bubble Sort, 24640, 0.0142207
+Quick Sort, 24640, 288.829
+Merge Sort, 24640, 1.62823
+Shell Sort, 24640, 0.118524
+Radix Sort (LSD), 24640, 0.146578
+Insertion Sort, 26880, 0.0250573
+Selection Sort, 26880, 200.017
+Bubble Sort, 26880, 0.0156405
+Quick Sort, 26880, 344.514
+Merge Sort, 26880, 1.72931
+Shell Sort, 26880, 0.122442
+Radix Sort (LSD), 26880, 0.156082
+Insertion Sort, 29120, 0.026491
+Selection Sort, 29120, 234.205
+Bubble Sort, 29120, 0.0166053
+Quick Sort, 29120, 404.595
+Merge Sort, 29120, 1.88615
+Shell Sort, 29120, 0.132051
+Radix Sort (LSD), 29120, 0.168965
+Insertion Sort, 31360, 0.0293688
