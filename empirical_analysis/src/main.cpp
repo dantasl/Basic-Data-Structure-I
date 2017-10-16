@@ -35,14 +35,14 @@ int main(int const argc, char const **argv)
     sort_times.open("time/sort_times_quicks.csv", ios_base::app | ios_base::out);
     sort_times << "Algorithm, Input Size, Average Time" << endl; //writing header
 
-    for(i = 0, i_size = flag_custom_size ? max_sample_size : 1; 
-        i < (flag_custom_size ? 1 : 25 );
+    for(i = 0, i_size = flag_custom_size ? max_sample_size : 1;
+        i < (flag_custom_size ? 1 : 26 );
         ++i, i_size = flag_custom_size ? i_size : i * 2240)
     {
         for(unsigned int j = 0; j < sort_list.size(); ++j) //iterates over each function in vector
         {
             for(int k = 1; k <= 50; ++k)
-            {                
+            {               
                 auto end = sort_list[j] == quick_sort ? A.begin() + i_size : A.begin() + i_size - 1;
                 
                 // Calculates running time for each sorting algorithm
