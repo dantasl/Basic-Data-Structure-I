@@ -32,13 +32,13 @@ If you want to run only certain sorting functions instead of the whole group, yo
 * sh for Shell Sort;
 * r for Radix Sort (LSD).
 
-You can make any combinations of functions that you want. <b>e.g.</b>: <code>./bin/sort_algorithms -f i m sh r</code> will run the analysis for Insertion Sort, Merge Sort, Shell Sort and Radix Sort (LSD) only.
+You can make any combinations of functions that you want, <b>e.g.</b>: <code>./bin/sort_algorithms -f i m sh r</code> will run the analysis for Insertion Sort, Merge Sort, Shell Sort and Radix Sort (LSD) only.
 
 In addition to that, you may choose any sample size that you want. The only difference is that the code will execute only the custom size, ignoring all the others.
 
-If you want to do so, just add <code>-ri {new sample size}</code>, where the params can be any unsigned integer that you want. <b>e.g.</b>: <code>./bin/sort_algorithms -ri 10000</code>
+If you want to do so, just add <code>-ri {new sample size}</code>, where the params can be any unsigned integer that you want, <b>e.g.</b>: <code>./bin/sort_algorithms -ri 10000</code>
 
-You can also combine the params. <b>e.g.</b>:
+You can also combine the params, <b>e.g.</b>:
 
 * <code>./bin/sort_algorithms -f i s b -ri 1200</code>
 
