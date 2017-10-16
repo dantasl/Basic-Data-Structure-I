@@ -20,7 +20,9 @@ Follow the instructions below to compile and run the project:
 * Type <code>make init</code> to create the project structure;
 * Type <code>make</code> to compile the project.
 
-In order to run, there are some options you may want to explore. If you want to run only certain sorting functions instead of the whole group, you can type <code>-f {function name}</code> where the params can be:
+In order to run, there are some options you may want to explore.
+
+If you want to run only certain sorting functions instead of the whole group, you can type <code>-f {function name}</code> where the params can be:
 
 * i for Insertion Sort;
 * s for Selection Sort;
@@ -30,11 +32,13 @@ In order to run, there are some options you may want to explore. If you want to 
 * sh for Shell Sort;
 * r for Radix Sort (LSD).
 
-You can make any combinations of functions that you want. e.g.: <code>./bin/sort_algorithms -f i m sh r</code> will run the analysis for Insertion Sort, Merge Sort, Shell Sort and Radix Sort (LSD) only.
+You can make any combinations of functions that you want. <b>e.g.</b>: <code>./bin/sort_algorithms -f i m sh r</code> will run the analysis for Insertion Sort, Merge Sort, Shell Sort and Radix Sort (LSD) only.
 
-In addition to that, you may choose any sample size that you want. The only difference is that the code will execute only the custom size, ignoring all the others. If you want to do so, just add <code>-ri {new sample size}</code>, where the params can be any unsigned integer that you want. e.g.: <code>./bin/sort_algorithms -ri 10000</code>
+In addition to that, you may choose any sample size that you want. The only difference is that the code will execute only the custom size, ignoring all the others.
 
-You can also combine the params. e.g.:
+If you want to do so, just add <code>-ri {new sample size}</code>, where the params can be any unsigned integer that you want. <b>e.g.</b>: <code>./bin/sort_algorithms -ri 10000</code>
+
+You can also combine the params. <b>e.g.</b>:
 
 * <code>./bin/sort_algorithms -f i s b -ri 1200</code>
 
