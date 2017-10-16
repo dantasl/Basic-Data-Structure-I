@@ -24,13 +24,13 @@ In order to run, there are some options you may want to explore.
 
 If you want to run only certain sorting functions instead of the whole group, you can type <code>-f {function name}</code> where the params can be:
 
-* i for Insertion Sort;
-* s for Selection Sort;
-* b for Bubble Sort;
-* q for Quick Sort;
-* m for Merge Sort;
-* sh for Shell Sort;
-* r for Radix Sort (LSD).
+* <code>i</code> for <code>Insertion Sort</code>;
+* <code>s</code> for <code>Selection Sort</code>;
+* <code>b</code> for <code>Bubble Sort</code>;
+* <code>q</code> for <code>Quick Sort</code>;
+* <code>m</code> for <code>Merge Sort</code>;
+* <code>sh</code> for <code>Shell Sort</code>;
+* <code>r</code> for <code>Radix Sort (LSD)</code>.
 
 You can make any combinations of functions that you want, <b>e.g.</b>: <code>./bin/sort_algorithms -f i m sh r</code> will run the analysis for Insertion Sort, Merge Sort, Shell Sort and Radix Sort (LSD) only.
 
@@ -43,5 +43,9 @@ You can also combine the params, <b>e.g.</b>:
 * <code>./bin/sort_algorithms -f i s b -ri 1200</code>
 
 This will run Insertion Sort, Selection Sort and Bubble Sort with a sample size of 1200.
+
+If you just want to run the code with the default configurations, type:
+
+* <code>./bin/sort_algorithms</code>
 
 <b>For more information, check the code and the comments.</b>
