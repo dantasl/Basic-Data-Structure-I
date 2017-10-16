@@ -48,4 +48,4 @@ If you just want to run the code with the default configurations, type:
 
 * <code>./bin/sort_algorithms</code>
 
-<b>For more information, check the code and the comments.</b>
+<b>For more information, check the code and the comments or send me an email.</b>
