@@ -3,5 +3,15 @@
 https://www.youtube.com/watch?v=SCDFotjMHTw
 
 Quick, Merge, Shell e Radix para - Random (X) - Increasing (X) - Decreasing () - aqui já mostra Merge e Quick
-Insertion, Selection e Bubble - Random(X) - Increasing (X) - Decreasing ()
-Quick (), Merge (), Shell (), Radix (), Insertion (), Selection (), Bubble () comparativos entre si para Random, Increasing and Decreasing
+Insertion, Selection e Bubble - Random(X) - Increasing (X) - Decreasing (X)
+Quick (X), Merge (X), Shell (X), Radix (X), Insertion (X), Selection (X), Bubble (X) comparativos entre si para Random, Increasing and Decreasing
+
+Gerar big oh graph
+
+Slow ones:
+
+Quick - inc/dec = Selection - ran/inc = Insertion - ran/inc = Bubble - ran/inc
+
+Quick ones:
+
+Quick - ran = Merge
