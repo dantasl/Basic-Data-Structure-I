@@ -1,0 +1,7 @@
+﻿Gráficos:
+
+https://www.youtube.com/watch?v=SCDFotjMHTw
+
+Quick, Merge, Shell e Radix para - Random (X) - Increasing (X) - Decreasing () - aqui já mostra Merge e Quick
+Insertion, Selection e Bubble - Random(X) - Increasing (X) - Decreasing ()
+Quick (), Merge (), Shell (), Radix (), Insertion (), Selection (), Bubble () comparativos entre si para Random, Increasing and Decreasing
