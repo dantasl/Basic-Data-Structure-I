@@ -1,11 +1,6 @@
 #include "build.h"
 #include <iostream>
 
-// put in the docs this: if you put -f and then types names of inexistent functions, that's okay, no errors
-// if you combine names of existent and unexistent functions, thats okay, only the existent will run
-// the code is case sensitive! s != S
-// the order you type the names is the order that they will be executed!
-
 void build_list(int const argc, char const **argv, vector<sort_functions> &sort_list, vector<string> &names)
 {
 	if(argc > 1){
@@ -53,14 +48,6 @@ void build_list(int const argc, char const **argv, vector<sort_functions> &sort_
 	};
 }
 
-/*
-	This functions sets the imediate value after -ri and sets it as the maximum sample size.
-	note: using this argument, the program will only execute for this value, no more than this
-	if is only -ri and nothing after it, program takes 0 as maximum value
-	if is only -ri followed by only chars, no numbers on it, 0 is maximum value
-	since we need to tell the program to execute only for this maximum sample size, there is a need
-	for a flag.
-*/
 void build_sample_size(int const argc, char const **argv, unsigned long &sample_max_size, bool &custom_size)
 {
 	custom_size = false;
@@ -87,11 +74,9 @@ void build_fill_vector(vector<unsigned int> &A, unsigned long const &sample_max_
 	random_device rd;
     mt19937 g(rd());
     A.resize(sample_max_size);
-	iota( A.begin(), A.end(), 1 );	
-	shuffle(A.begin(), A.end(), g); // vector now is unsorted
-}
-
-void build_plot_graph()
-{
-	
+	iota( A.begin(), A.end(), 1 );
+	//Comment line below to use non-decreasing or non-increasing scenario.	
+	shuffle(A.begin(), A.end(), g);
+	//Only to use non-increasing scenario you should uncomment line below.
+	//reverse(A.begin(), A.end());
 }

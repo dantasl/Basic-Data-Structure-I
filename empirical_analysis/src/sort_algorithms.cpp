@@ -1,3 +1,10 @@
+/**
+ * @file    sort_algorithms.cpp
+ * @brief   Implementing Insertion Sort, Selection Sort, Bubble Sort, Quick Sort, Merge Sort, Shell Sort e Radix Sort.
+ * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
+ * @date    10/10/2017
+ */
+
 #include "sort_algorithms.h"
 
 void merge(std::vector<unsigned int> &A, It begin, It middle, It last, Compare cmp)
