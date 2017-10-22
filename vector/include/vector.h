@@ -122,13 +122,21 @@ namespace sc
 			template< typename InputItr >
 			vector(InputItr first, InputItr last)
 			{
-				auto total_size = last - first;
-				m_end = size_t(total_size);
-				m_capacity = size_t(total_size);
+				auto _first = first;
+				auto _last = last;
+				int size = 0;
+				
+				while(_first != _last)
+					size++;
+
+				m_end = size_t(size);
+				m_capacity = size_t(size);
 				m_storage = new T[m_capacity];
- 
-				for(auto i(0u); i != total_size; ++i)
-					m_storage[i] = i+first;
+
+				int i = 0;
+
+				while(first != last)
+					m_storage[i++] = *first;
 			}
 			
 			vector & operator= (const vector &v)
@@ -217,7 +225,7 @@ namespace sc
 			
 			void pop_front( void )
 			{
-				for(auto i(0); i != m_end; ++i)
+				for(auto i(0u); i != m_end; ++i)
                     m_storage[i] = m_storage[i+1];
                 m_end--;
 
@@ -226,7 +234,7 @@ namespace sc
 			iterator insert( iterator at, const_reference ref )
 			{				
 				auto it = begin();
-				int counter = 0;
+				unsigned int counter = 0;
 				
 				for(counter = 0; it != at; ++it, ++counter);
 				
@@ -246,10 +254,10 @@ namespace sc
 			{				
 				auto total_distance = _last - _first;
 				auto first = _first;
-				auto begin = begin();
-				int start = 0;
+				auto _begin = begin();
+				unsigned int start = 0;
 
-				for(; begin != at; ++begin, ++start);
+				for(; _begin != at; ++_begin, ++start);
 
 				while(m_end + total_distance > m_capacity)
 					reserve(2*m_capacity);
@@ -264,16 +272,16 @@ namespace sc
 				}
 				m_end += total_distance;
 
-				return begin;
+				return _begin;
 			}
 
 			iterator insert(iterator at, std::initializer_list<value_type> list)
 			{				
 				auto total_distance = list.size();
-				auto begin = begin();
-				int start = 0;
+				auto _begin = begin();
+				unsigned int start = 0;
 
-				for(; begin != at; ++begin, ++start);
+				for(; _begin != at; ++_begin, ++start);
 
 				while(m_end + total_distance > m_capacity)
 					reserve( 2 * m_capacity );
@@ -286,7 +294,7 @@ namespace sc
 				
 				m_end += total_distance;
 
-				return begin;
+				return _begin;
 			}
 			
 			void reserve(size_type new_size)
@@ -352,13 +360,13 @@ namespace sc
 			iterator erase( iterator _first, iterator _last )
 			{
 				auto first = _first;
-				auto begin = begin();
-				int start = 0;
+				auto _begin = begin();
+				unsigned int start = 0;
 				int counter = 0;
 
 				for(; first != _last; ++first, ++counter);
 
-				for(; begin != first; ++start, ++begin);
+				for(; _begin != first; ++start, ++_begin);
 				
 				for(auto i(start); i != m_end - counter; ++i)
 					m_storage[i] = m_storage[i+counter];
@@ -369,16 +377,16 @@ namespace sc
 
 			iterator erase(iterator it)
 			{
-				auto begin = begin();
+				auto _begin = begin();
 				int counter = 0;
 
-				for(; it != begin; ++begin, ++counter);
+				for(; it != _begin; ++_begin, ++counter);
 
 				for(auto i(counter); i != m_end - 1; ++i)
 					m_storage[i] = m_storage[i+1];
 
 				m_end--;
-				return iterator(begin);
+				return iterator(_begin);
 			}
 
 			/// [V] ELEMENT ACCESS
@@ -450,7 +458,7 @@ namespace sc
 			}
 
 			/// [VII] FRIEND FUNCTIONS
-			friend std::ostream & operator<< ( std::ostream & os_, const vector<T> & v_ )
+			friend std::ostream & operator<< ( std::ostream & os_, vector<T> & v_ )
 			{
 				if( v_.empty() )
 				{

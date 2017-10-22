@@ -8,7 +8,7 @@ OBJ_DIR=./build
 BIN_DIR=./bin
 DOC_DIR=./doc
 
-CFLAGS = -Wall -pedantic -ansi -std=c++11 -I. -I$(INC_DIR)
+CFLAGS = -pedantic -ansi -std=c++11 -I. -I$(INC_DIR)
 
 .PHONY: all clean distclean doxy
 
