@@ -1,3 +1,13 @@
+/**
+ * @file    vector.h
+ * @brief   Defining and implementing functions for ADT Vector.
+ *			Unfortunally, with time given, I was not able to write a good documentation for this class,
+ *			but pretty much the basic information you need is available in the .pdf file available on
+ *			the project's base.
+ * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
+ * @date    21/10/2017
+ */
+
 #ifndef _VECTOR_H_
 #define _VECTOR_H_
 
@@ -19,7 +29,7 @@ namespace sc
 		public:
 			MyIterator(T * ptr_ = nullptr)
 				: current(ptr_)
-				{/* Empty */}
+				{/* empty */}
 
 			const T & operator*() const
 			{
@@ -78,9 +88,9 @@ namespace sc
 			using pointer = T *;
 
 		private:
-			size_type m_end;			//Quantidade de elementos
-			size_type m_capacity;		//Capacidade de armazenamento
-			T * m_storage;				//Armazenamento
+			size_type m_end;
+			size_type m_capacity;
+			T * m_storage;
 
 		public:
 
@@ -89,7 +99,7 @@ namespace sc
 				: m_end(0)
 				, m_capacity(DEFAULT_SIZE)
 				, m_storage(new T[m_capacity])
-				{ /* Empty */ }
+				{ /* empty */ }
 			
 			~vector() { delete [] m_storage; }
 
@@ -106,7 +116,7 @@ namespace sc
 				: m_end(0)
 				, m_capacity(n)
 				, m_storage (new T[m_capacity])
-				{/*empty*/}
+				{ /* empty */ }
 
 			
 			template< typename InputItr >
@@ -132,39 +142,37 @@ namespace sc
 			}
 
 			/// [II] ITERATORS
-			/// Returns a iterator to the first element of the vector
 			iterator begin( void )
 			{
 				return iterator(&m_storage[0]);
 			}
-			/// Returns a iterator to the last element of the vector
+
 			iterator end( void )
 			{
 				return iterator(&m_storage[m_end]);
 			}
-			/// Returns a constant iterator to the first element of the vector
+
 			const_iterator cbegin( void ) const
 			{
 				return const_iterator(&m_storage[0]);
 			}
-			/// Returns a constant iterator to the last element of the vector
+
 			const_iterator cend( void ) const
 			{
 				return const_iterator(&m_storage[m_end]);
 			}
 
 			/// [III] CAPACITY
-			/// Return the logical size of the vector
 			size_type size( void ) const
 			{
 				return m_end;
 			}
-			/// Return the total capacity of the vector
+			
 			size_type capacity( void ) const
 			{
 				return m_capacity;
 			}
-			/// Check if the vector is empty
+			
 			bool empty( void ) const
 			{
 				return m_end == 0;
@@ -178,7 +186,7 @@ namespace sc
 				m_capacity = 0; 
 				m_storage = nullptr;
 			}
-			/// Adds a element to the begin of the vector
+			
 			void push_front(const_reference ref)
 			{
 				if( m_end == m_capacity )
@@ -190,7 +198,7 @@ namespace sc
                 m_end++;
                 m_storage[0] = ref;
 			}
-			/// Adds a element to the end of the vector
+			
 			void push_back(const_reference ref)
 			{
 				if( m_end == m_capacity )
@@ -198,7 +206,7 @@ namespace sc
 	
 				m_storage[m_end++] = ref;
 			}
-			/// Withdraw the last element in the vector
+			
 			void pop_back( void )
 			{			
 				if( empty() )
@@ -206,7 +214,7 @@ namespace sc
 				m_storage[--m_end];
 
 			}
-			/// Withdraw the last element in the vector
+			
 			void pop_front( void )
 			{
 				for(auto i(0); i != m_end; ++i)
@@ -214,7 +222,7 @@ namespace sc
                 m_end--;
 
 			}
-			/// Inserts a element, range of elements, or list to an especific point in the vector
+			
 			iterator insert( iterator at, const_reference ref )
 			{				
 				auto it = begin();
@@ -280,25 +288,19 @@ namespace sc
 
 				return begin;
 			}
-			/// Increases de capacity of the vector
+			
 			void reserve(size_type new_size)
 			{
 				
-				if(new_size <= m_capacity) return; //!< It's not full
-				/// Creates the new Storage area
+				if(new_size <= m_capacity) return;
 				T * temp = new T[new_size];  
-				/// Backup the data to the new storage area
 				for(auto i(0u); i < m_capacity; ++i)
 					temp[i] = m_storage[i];
-				/// Delete the old storage area
 				delete [] m_storage;
-				/// Reassings the storage area
 				m_storage = temp;
-				/// Updates the vector's storage capacity
 				m_capacity = new_size;
-
 			}
-			/// Makes the capacity of the vector equal to its logical lenght
+			
 			void shrink_to_fit( void )
 			{
 				T * temp = new T[m_end];  
@@ -308,7 +310,7 @@ namespace sc
 				m_storage = temp;
 				m_capacity = m_end;
 			}
-			/// Fill the vector with a especific element, range of elements or list
+			
 			void assign(const_reference ref)
 			{
 				if( empty() )
@@ -316,6 +318,7 @@ namespace sc
 				for(auto i(0u); i != m_end; ++i)
 					m_storage[i] = ref;
 			}
+			
 			void assign(std::initializer_list<T> list)
 			{
 				if( empty() )
@@ -333,6 +336,7 @@ namespace sc
 					}
 				}
 			}			
+			
 			template<typename InputItr>
 			void assign(InputItr first, InputItr last)
 			{				
@@ -344,7 +348,7 @@ namespace sc
 				for(auto i(0u); i != total_distance; i++)
 					m_storage[i] = i + first;
 			}
-			/// Erases an element in a specific place in the vector
+			
 			iterator erase( iterator _first, iterator _last )
 			{
 				auto first = _first;
@@ -378,27 +382,27 @@ namespace sc
 			}
 
 			/// [V] ELEMENT ACCESS
-			/// Returns the last element in the vector
+			
 			const_reference back( void ) const
 			{
 				return m_storage[m_end-1];
 			}
-			/// Returns the first element in the vector
+			
 			const_reference front( void ) const
 			{
 				return m_storage[0];
 			}
-			/// Returns the constant content of the position pos (exemple: myvector[3])
+			
 			const_reference operator[]( size_type at ) const
 			{
 				return m_storage[at];
 			}
-			/// Returns the content of the position pos (exemple: myvector[3])
+			
 			reference operator[](size_type at)
 			{
 				return m_storage[at];
 			}
-			/// Returns the content of the position pos after check if the element exists
+			
 			const_reference at(size_type at)
 			{
 				if(at >= m_end)
@@ -406,30 +410,18 @@ namespace sc
 				return m_storage[at];
 
 			}
-			/// Returns a pointer to the vector data
+			
 			pointer data( void )
 			{
 				return m_storage;
 			}
-			/// Returns a constant pointer to the vector data
+			
 			const_reference data( void ) const
 			{
 				return m_storage;
 			}
-			void print( void ) const
-			{
-				if( empty() )
-				{
-					std::cerr << "Unable to print elements of an empty vector." << std::endl;
-					return;
-				}
-				std::cout << "|";
-				std::copy(&m_storage[0], &m_storage[m_end], std::ostream_iterator<int>(std::cout, "|"));
-				std::cout << std::endl;
-			}
 
-			/// [VI] OPERATORS
-			/// Checks if two vectors have the same capacity logical size and contents
+			/// [VI] OPERATORS			
 			bool operator==(const vector & v) const
 			{
 				if( (this->m_capacity != v.m_capacity) or (this->m_end != v.m_end) )
@@ -443,7 +435,7 @@ namespace sc
 
 				return true;
 			}
-			/// Oposit logic of operator==
+			
 			bool operator!=(const vector & v) const
 			{
 				if( (this->m_capacity != v.m_capacity) or (this->m_end != v.m_end) )
@@ -455,6 +447,43 @@ namespace sc
 						return true;
 				}
 				return false;
+			}
+
+			/// [VII] FRIEND FUNCTIONS
+			friend std::ostream & operator<< ( std::ostream & os_, const vector<T> & v_ )
+			{
+				if( v_.empty() )
+				{
+					os_ << "Unable to print elements of an empty vector." << std::endl;
+					return os_;
+				}
+				for(auto i = v_.begin(); i != v_.end(); ++i)
+					os_ << *i << std::endl;
+				return os_;	
+			}
+
+			friend void swap( vector<T> & first_, vector<T> & second_ )
+			{
+				if(first_.size() != second_.size())
+				{
+					std::cout << "Unable to swap elements between two different sized vectors." << std::endl;
+					return;
+				}	
+					
+				if( first_.empty() or second_.empty() )
+				{
+					std::cout << "Unable to make operations with an empty vector." << std::endl;
+					return;
+				}
+					
+				auto temp = first_.front();
+
+				for(auto i(0u); i != first_.size(); ++i)
+				{
+					temp = first_.m_storage[i];
+					first_.m_storage[i] = second_.m_storage[i];
+					second_.m_storage[i] = temp;
+				}
 			}
 	};	
 }
