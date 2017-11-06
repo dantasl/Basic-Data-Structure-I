@@ -11,49 +11,50 @@ int main(){
 	
 	std::cout << std::endl;
 	{
-		std::cout << "\xe2\x99\xa5\n";
-		std::cout << "Testing - Constructors, Push_Back(), Push_Front():\n";
+		std::cout << "Test - Constructor | Push_Back() | Push_Front() " << std::endl << std::endl;
 		sc::vector<int> a;
-
-		for(auto i(0); i < 10; i++){
-			a.push_back((i+1)*1);
-		}
-		a.push_front(0);
-
-		std::cout << ">>> A: ";
-		std::cout << a << std::endl;;
+		std::cout << "Pushing back to vector [10, ..., 50)" << std::endl;
+		for(auto i(10); i < 50; ++i)
+			a.push_back(i);
+		
+		std::cout << ">>> A: " << std::endl;
+		std::cout << a << std::endl;
+		
+		std::cout << "Now, pushing front value 5" << std::endl;
+		a.push_front(5);
+		
+		std::cout << ">>> A: " << std::endl;
+		std::cout << a << std::endl;		
 	}
+	
 	std::cout << std::endl;
 	{
-		std::cout << "Testing - Copy Constructors:\n";
+		std::cout << "Testing - Copy Constructors:" << std::endl << std::endl;
 		sc::vector<int> a;
-		for(auto i(0); i < 10; i++){
-			a.push_back((i+1)*2);
-		}
-		std::cout << ">>> A: ";
+		
+		std::cout << "Pushing back to vector A each element in [0, ..., 50) multiplied by 3." << std::endl;
+		for(auto i(0); i < 50; i++)
+			a.push_back(i * 3);
+		std::cout << ">>> Vector A: " << std::endl;
 		std::cout << a << std::endl;
-		std::cout << a << std::endl;;
-
-		// Copying with vector(vector)
+		
+		std::cout << "Creating vector B with vector A passed to B's copy constructor." << std::endl;
 		sc::vector<int> b(a);
-		std::cout << ">>> B: ";
-		std::cout << b << std::endl;;
+		std::cout << ">>> Vector B: " << std::endl;
+		std::cout << b << std::endl;
 
-		// Copying with vector = vector
+		std::cout << "Creating vector C with vector A passed to C's assignment operator." << std::endl;
 		sc::vector<int> c = a;
-		std::cout << ">>> C: ";
-		std::cout << c << std::endl;;
+		std::cout << ">>> Vector C: " << std::endl;
+		std::cout << c << std::endl;
 
-		// Copying with range (10, 43)
-		sc::vector<int> d(10, 43);
-		std::cout << ">>> D: ";
-		std::cout << d << std::endl;;
-
-		// Copying with range of D
-		sc::vector<int> e(d.begin(), d.end());
-		std::cout << ">>> E: ";
-		std::cout << e << std::endl;; 
+		std::cout << "Creating vector D passing range [ C.begin(), C.end() ) to D's constructor." << std::endl;
+		sc::vector<int> d( c.begin() , c.end() );
+		std::cout << ">>> Vector D: ";
+		std::cout << d << std::endl;
 	}
+
+	/*
 	std::cout << std::endl;
 	{
 		std::cout << "Testing - Pop_Front(), Pop_Back(), Front(), Back():\n";
@@ -165,5 +166,5 @@ int main(){
 		std::cout << c << std::endl;;
 
 	}
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 }

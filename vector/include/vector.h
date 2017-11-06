@@ -18,6 +18,9 @@
 #include <algorithm>
 #include <initializer_list>
 
+class MyIterator;
+class vector;
+
 namespace sc
 {
 	template <typename T>
@@ -122,21 +125,22 @@ namespace sc
 			template< typename InputItr >
 			vector(InputItr first, InputItr last)
 			{
-				auto _first = first;
-				auto _last = last;
-				int size = 0;
-				
-				while(_first != _last)
-					size++;
+				int distance(0);
+				auto f = first;
 
-				m_end = size_t(size);
-				m_capacity = size_t(size);
+				while( f != last )
+				{
+					distance++;
+					f++;
+				}	
+
+				m_end = size_type(distance);
+				m_capacity = size_type(distance);
 				m_storage = new T[m_capacity];
 
-				int i = 0;
-
-				while(first != last)
-					m_storage[i++] = *first;
+ 				auto it = first;
+				for(auto i(0u); i != distance; ++i, ++it)
+					m_storage[i] = *it;
 			}
 			
 			vector & operator= (const vector &v)
@@ -466,7 +470,8 @@ namespace sc
 					return os_;
 				}
 				for(auto i = v_.begin(); i != v_.end(); ++i)
-					os_ << *i << std::endl;
+					os_ << *i << " ";
+				os_ << std::endl;
 				return os_;	
 			}
 
