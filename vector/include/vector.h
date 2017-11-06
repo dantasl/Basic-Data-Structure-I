@@ -478,26 +478,23 @@ namespace sc
 
 			friend void swap( vector<T> & first_, vector<T> & second_ )
 			{
-				if(first_.size() != second_.size())
-				{
-					std::cout << "Unable to swap elements between two different sized vectors." << std::endl;
-					return;
-				}	
-					
 				if( first_.empty() or second_.empty() )
 				{
 					std::cout << "Unable to make operations with an empty vector." << std::endl;
 					return;
 				}
-					
-				auto temp = first_.front();
 
-				for(auto i(0u); i != first_.size(); ++i)
-				{
-					temp = first_.m_storage[i];
-					first_.m_storage[i] = second_.m_storage[i];
-					second_.m_storage[i] = temp;
-				}
+				auto temp = first_;
+
+				first_.m_storage = second_.m_storage;
+				first_.m_end = second_.m_end;
+				first_.m_capacity = second_.m_capacity;
+
+				second_.m_storage = temp.m_storage;
+				second_.m_end = temp.m_end;
+				second_.m_capacity = temp.m_capacity;
+
+				delete [] temp;
 			}
 	};	
 }

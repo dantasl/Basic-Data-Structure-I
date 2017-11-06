@@ -89,19 +89,24 @@ int main(){
 		std::cout << a << std::endl;		
 	}
 
-	/*
 	std::cout << std::endl;
 	{
-		std::cout << "Testing - Assign():\n";
-		sc::vector<int> a;
-		for(auto i(0); i < 10; i++){
-			a.push_back((i+1)*6);
-		}
-		a.assign({8,9,10});
+		std::cout << "Testing - Assign():" << std::endl << std::endl;
+		sc::vector<std::string> a;
+		
+		std::cout << "Pushing back to vector A strings SYMPATHY, FOR, THE:" << std::endl;
+		a.push_back("SYMPATHY"); a.push_back("FOR"); a.push_back("THE");
 
-		std::cout << ">>> A: ";
+		std::cout << ">>> Vector A: " << std::endl;
+		std::cout << a << std::endl;
+
+		std::cout << "Assigning a list of strings {8, 9, 10} to vector A. " << std::endl;
+		a.assign( {"8","9","10"} );
+
+		std::cout << ">>> Vector A after assign(): " << std::endl;
 		std::cout << a << std::endl;;
-	}*/
+	}
+
 	std::cout << std::endl;
 	{
 		std::cout << "Testing Operators '==' and '!='" << std::endl << std::endl;
@@ -173,5 +178,31 @@ int main(){
 		std::cout << ">>> Vector B after insert(): " << std::endl;
 		std::cout << b << std::endl;
 	}
+	
 	std::cout << std::endl;
+	{
+		std::cout << "Testing - Swap():" << std::endl << std::endl;
+		std::cout << "Pushing back to vector A chars l, u, c, a, s:" << std::endl;
+		sc::vector<char> a;
+		a.push_back('l'); a.push_back('u'); a.push_back('c'); a.push_back('a'); a.push_back('s');
+
+		std::cout << ">>> Vector A: " << std::endl;
+		std::cout << a << std::endl;
+
+		std::cout << "Pushing back to vector B chars g, o, m, e, s:" << std::endl;
+		sc::vector<char> b;
+		b.push_back('g'); b.push_back('o'); b.push_back('m'); b.push_back('e'); b.push_back('s');
+
+		std::cout << ">>> Vector B: " << std::endl;
+		std::cout << b << std::endl;
+
+		std::cout << "Swaping elements of vector A with vector B." << std::endl;
+		swap(a, b);
+
+		std::cout << ">>> Vector A after swap():" << std::endl;
+		std::cout << a << std::endl;
+
+		std::cout << ">>> Vector B after swap():" << std::endl;
+		std::cout << b << std::endl;
+	}
 }
