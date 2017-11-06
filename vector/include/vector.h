@@ -368,6 +368,7 @@ namespace sc
 				unsigned int start = 0;
 				int counter = 0;
 
+				//Discover how many elements there are in range.
 				for(; first != _last; ++first, ++counter);
 
 				for(; _begin != first; ++start, ++_begin);
