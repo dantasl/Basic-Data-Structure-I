@@ -493,8 +493,6 @@ namespace sc
 				second_.m_storage = temp.m_storage;
 				second_.m_end = temp.m_end;
 				second_.m_capacity = temp.m_capacity;
-
-				delete [] temp;
 			}
 	};	
 }

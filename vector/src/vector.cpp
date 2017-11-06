@@ -189,9 +189,9 @@ int main(){
 		std::cout << ">>> Vector A: " << std::endl;
 		std::cout << a << std::endl;
 
-		std::cout << "Pushing back to vector B chars g, o, m, e, s:" << std::endl;
+		std::cout << "Pushing back to vector B chars d, a, n, t, a, s:" << std::endl;
 		sc::vector<char> b;
-		b.push_back('g'); b.push_back('o'); b.push_back('m'); b.push_back('e'); b.push_back('s');
+		b.push_back('d'); b.push_back('a'); b.push_back('n'); b.push_back('t'); b.push_back('a'); b.push_back('s');
 
 		std::cout << ">>> Vector B: " << std::endl;
 		std::cout << b << std::endl;
