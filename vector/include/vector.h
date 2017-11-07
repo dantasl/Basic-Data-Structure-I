@@ -568,18 +568,38 @@ namespace sc
 						cont++;
 					}
 				}
-			}			
-			
+			}
+
+			/**
+			 * @brief      This function will replace all previous stored
+			 *             elements with elements on range [first, last)
+			 *
+			 * @param[in]  first     Where the range begins.
+			 * @param[in]  last      Where the range ends.
+			 *
+			 * @tparam     InputItr  Iterator pointing to the ranges memory address.
+			 */
 			template<typename InputItr>
 			void assign(InputItr first, InputItr last)
-			{				
-				auto total_distance = last - first;
-				m_end = size_t(total_distance);
-				m_capacity = size_t(total_distance);
-				m_storage = new T[m_capacity];
+			{
+				int distance(0);
+				auto f = first;
 
-				for(auto i(0u); i != total_distance; i++)
-					m_storage[i] = i + first;
+				while( f != last )
+				{
+					distance++;
+					f++;
+				}
+
+				T * temp = new T[distance];
+				delete [] m_storage;
+				m_end = size_type(distance);
+				m_capacity = size_type(distance);
+				m_storage = temp;
+
+ 				auto it = first;
+				for(auto i(0u); i != distance; ++i, ++it)
+					m_storage[i] = *it;
 			}
 			
 			iterator erase( iterator _first, iterator _last )

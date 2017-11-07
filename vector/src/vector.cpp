@@ -104,7 +104,14 @@ int main(){
 		a.assign( {"8","9","10"} );
 
 		std::cout << ">>> Vector A after assign(): " << std::endl;
-		std::cout << a << std::endl;;
+		std::cout << a << std::endl;
+
+		std::cout << "Creating vector B and using assign(a.begin(), a.end()) on B." << std::endl;
+		sc::vector<std::string> b;
+		b.assign( a.begin(), a.end() );
+
+		std::cout << ">>> Vector B after assign(): " << std::endl;
+		std::cout << b << std::endl;
 	}
 
 	std::cout << std::endl;
@@ -148,7 +155,7 @@ int main(){
 		a.erase( a.begin(), last );
 
 		std::cout << ">>> Vector A after erase(): " << std::endl;
-		std::cout << a << std::endl;;
+		std::cout << a << std::endl;
 	}
 
 	std::cout << std::endl;
