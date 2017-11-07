@@ -38,7 +38,7 @@ namespace sc
 			 */
 			MyIterator(T * ptr_ = nullptr)
 				: current(ptr_)
-				{/* empty */}
+				{/* empty */}	
 
 			/**
 			 * @brief      Dereferencing operator.
@@ -220,9 +220,9 @@ namespace sc
 			 */
 			vector & operator= (const vector &v)
 			{
-				m_end(v.m_end);
-				m_capacity(v.m_capacity);
-				m_storage(new T[m_capacity]);
+				m_end = v.m_end;
+				m_capacity = v.m_capacity;
+				m_storage = new T[m_capacity];
 				for(auto i(0u); i != m_end; ++i)
 					m_storage[i] = v.m_storage[i];
 				return *this;
@@ -834,15 +834,10 @@ namespace sc
 					return;
 				}
 
-				//vector<T> temp = first_;
-				
-				/*first_.m_storage = second_.m_storage;
-				first_.m_end = second_.m_end;
-				first_.m_capacity = second_.m_capacity;
+				vector<T> temp = first_;
 
-				second_.m_storage = temp.m_storage;
-				second_.m_end = temp.m_end;
-				second_.m_capacity = temp.m_capacity;*/
+				first_ = second_;
+				second_ = temp;
 			}
 	};	
 }
