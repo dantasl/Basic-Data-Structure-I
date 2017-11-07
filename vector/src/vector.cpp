@@ -151,8 +151,10 @@ int main(){
 		std::cout << a << std::endl;
 
 		std::cout << "Applying erase() on first 4 elements of vector A. " << std::endl;
-		auto last = a.begin(); last++; last++; last++; last++;
-		a.erase( a.begin(), last );
+		auto last = a.begin();
+		auto begin = a.begin();
+		last++; last++; last++; last++;
+		a.erase( begin, last );
 
 		std::cout << ">>> Vector A after erase(): " << std::endl;
 		std::cout << a << std::endl;

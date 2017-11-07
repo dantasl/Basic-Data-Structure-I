@@ -601,24 +601,33 @@ namespace sc
 				for(auto i(0u); i != distance; ++i, ++it)
 					m_storage[i] = *it;
 			}
-			
+
+			/**
+			 * @brief      This function will erase each element of this vector
+			 *             that is between the interval [first, last) provided
+			 *             by the client.
+			 *
+			 * @param[in]  _first  Where the interval begins.
+			 * @param[in]  _last   Where the interval ends.
+			 *
+			 * @return     Iterator pointing to the position where the last
+			 *             element was erased.
+			 */
 			iterator erase( iterator _first, iterator _last )
 			{
-				auto first = _first;
-				auto _begin = begin();
+				auto x = _first;
+				auto y = begin();
 				unsigned int start = 0;
 				int counter = 0;
 
-				//Discover how many elements there are in range.
-				for(; first != _last; ++first, ++counter);
+				while(x++ != _last)	counter++;
+				while(y != _first) start++;
 
-				for(; _begin != first; ++start, ++_begin);
-				
 				for(auto i(start); i != m_end - counter; ++i)
-					m_storage[i] = m_storage[i+counter];
+					m_storage[i] = m_storage[ i + counter ];
 
 				m_end -= counter;
-				return first;
+				return x;
 			}
 
 			/**
@@ -825,15 +834,15 @@ namespace sc
 					return;
 				}
 
-				auto temp = first_;
-
-				first_.m_storage = second_.m_storage;
+				//vector<T> temp = first_;
+				
+				/*first_.m_storage = second_.m_storage;
 				first_.m_end = second_.m_end;
 				first_.m_capacity = second_.m_capacity;
 
 				second_.m_storage = temp.m_storage;
 				second_.m_end = temp.m_end;
-				second_.m_capacity = temp.m_capacity;
+				second_.m_capacity = temp.m_capacity;*/
 			}
 	};	
 }
