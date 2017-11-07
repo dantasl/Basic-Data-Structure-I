@@ -1,11 +1,9 @@
 /**
  * @file    vector.h
  * @brief   Defining and implementing functions for ADT Vector.
- *			Unfortunally, with time given, I was not able to write a good documentation for this class,
- *			but pretty much the basic information you need is available in the .pdf file available on
- *			the project's base.
  * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
- * @date    21/10/2017
+ * @since   21/10/2017
+ * @date    06/11/2017
  */
 
 #ifndef _VECTOR_H_
@@ -42,7 +40,6 @@ namespace sc
 				: current(ptr_)
 				{/* empty */}
 
-
 			/**
 			 * @brief      Dereferencing operator.
 			 *
@@ -54,11 +51,8 @@ namespace sc
 				return *current;
 			}
 
-
 			/**
-			 * @brief      Pre-increment operator.
-			 *
-			 * @return     
+			 * @brief      Pre-increment operator.  
 			 */
 			MyIterator & operator++()
 			{
@@ -66,6 +60,9 @@ namespace sc
 				return *this;
 			}
 
+			/**
+			 * @brief      Post-increment operator.
+			 */
 			MyIterator operator++( int )
 			{
 				MyIterator temp = *this;
@@ -73,12 +70,18 @@ namespace sc
 				return temp;
 			}
 
+			/**
+			 * @brief      Pre-decrement operator.
+			 */
 			MyIterator & operator--()
 			{
 				current--;
 				return *this;
 			}
 
+			/**
+			 * @brief      Post-decrement operator.
+			 */
 			MyIterator operator--( int )
 			{
 				MyIterator temp = *this;
@@ -86,11 +89,29 @@ namespace sc
 				return temp;
 			}
 
+			/**
+			 * @brief      Equality operator. Checks if the data stored on this
+			 *             instance of MyIterator is equal to another
+			 *             MyIterator.
+			 *
+			 * @param[in]  rhs   Another instance to be checked.
+			 *
+			 * @return     True if they are equals. False otherwise.
+			 */
 			bool operator==(const MyIterator & rhs) const
 			{
 				return current == rhs.current;
 			}
 
+			/**
+			 * @brief      Non-equality operator. Checks if the data stored on
+			 *             this instance of MyIterator is different to another
+			 *             MyIterator.
+			 *
+			 * @param[in]  rhs   Another instance to be checked.
+			 *
+			 * @return     True if they are different. False otherwise.
+			 */
 			bool operator!=(const MyIterator & rhs) const
 			{
 				return current != rhs.current;
@@ -510,7 +531,7 @@ namespace sc
 
 			/**
 			 * @brief      This function will replace all previous stored
-			 *             elements of the vector with the new value given by
+			 *             elements of the vector for the new value given by
 			 *             the client.
 			 *
 			 * @param[in]  ref   The reference for the value that will be
@@ -525,9 +546,11 @@ namespace sc
 			}
 
 			/**
-			 * @brief      { function_description }
+			 * @brief      This function will replace all previous stored
+			 *             elements of the vector for the list provided by the
+			 *             client.
 			 *
-			 * @param[in]  list  The list
+			 * @param[in]  list  The list holding the values to be assigned.
 			 */
 			void assign(std::initializer_list<T> list)
 			{
@@ -578,6 +601,19 @@ namespace sc
 				return first;
 			}
 
+			/**
+			 * @brief      This function provides the client the possibility to
+			 *             erase from the vector an element at a specific memory
+			 *             address. Moves all elements to fill the gap left by
+			 *             removing and element and updates the logical size of
+			 *             the vector.
+			 *
+			 * @param[in]  it    The iterator with the address to the element
+			 *                   that will be erased from the vector.
+			 *
+			 * @return     Iterator pointing to the position where the element
+			 *             was deleted.
+			 */
 			iterator erase(iterator it)
 			{
 				auto _begin = begin();
@@ -671,9 +707,12 @@ namespace sc
 			}
 
 			/**
-			 * @brief      { function_description }
+			 * @brief      When this function is called, it will provide a
+			 *             constant reference to all the data stored on the
+			 *             vector.
 			 *
-			 * @return     { description_of_the_return_value }
+			 * @return     Constant attribute m_storage that holds all the
+			 *             elements stored on the vector.
 			 */
 			const_reference data( void ) const
 			{
