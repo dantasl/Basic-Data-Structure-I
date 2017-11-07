@@ -2,7 +2,8 @@
  * @file    vector.cpp
  * @brief   Testing functions implemented in vector.h
  * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
- * @date    21/10/2017
+ * @date    06/11/2017 
+ * @since   21/10/2017
  */
 
 #include "vector.h"
