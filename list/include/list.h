@@ -23,7 +23,14 @@ namespace ls
 				T data; //<! Data field
 				Node *prev; //<! Pointer to the previous node in the list.
 				Node *next; //<! Pointer to the next node in the list.
-				//<! Basic constructor.
+				
+				/**
+				 * @brief      Basic constructor.
+				 *
+				 * @param[in]  d     Data.
+				 * @param      p     Previous element.
+				 * @param      n     Next element.
+				 */
 				Node( const T & d = T(), Node * p = nullptr, Node *n = nullptr )
 					: data(d)
 					, prev(p)
@@ -36,6 +43,11 @@ namespace ls
 			{
 				protected:
 					Node *current;
+					/**
+					 * @brief      Basic constructor.
+					 *
+					 * @param      p     Node to initialize the const_iterator.
+					 */
 					const_iterator( Node * p ) : current( p ) { /* empty */ }
 					friend class list<T>;
 
@@ -544,9 +556,11 @@ namespace ls
 			}
 
 			/**
-			 * @brief      All
+			 * @brief      All previous stored elements on this list will now
+			 *             have their values replace by the one provided by the
+			 *             client.
 			 *
-			 * @param[in]  value  The value
+			 * @param[in]  value  Value that will replace all the others.
 			 */
 			void assign( const T& value )
 			{
@@ -562,6 +576,15 @@ namespace ls
 
 			/// [IV-a] MODIFIERS WITH ITERATORS
 			
+			/**
+			 * @brief      Clears the list and replaces the previous elements
+			 *             stored on this list by the ones in a range provided
+			 *             by the client.
+			 *
+			 * @param[in]  first  Where the range begins.
+			 * @param[in]  last   Where it ends.
+			 *
+			 */
 			template < class InItr >
 			void assign( InItr first, InItr last )
 			{
@@ -569,13 +592,29 @@ namespace ls
 				for(auto i = first; i != last; ++i) push_back(*i);				      
 			}
 
+			/**
+			 * @brief      Clears the list and replaces the previous elements
+			 *             stored on this list by the ones in an initializer
+			 *             list provided by the client.
+			 *
+			 * @param[in]  ilist  Initializer list containing the new elements.
+			 */
 			void assign( std::initializer_list<T> ilist )
 			{
 				clear();
 				for(auto i = ilist.begin(); i != ilist.end(); ++i)
 					push_back(*i);
 			}
-			
+
+			/**
+			 * @brief      Inserts a new node at a position provided by the
+			 *             client.
+			 *
+			 * @param[in]  itr    Where the new node will be inserted.
+			 * @param[in]  value  The value stored on the node.
+			 *
+			 * @return     Iterator to the new inserted element.
+			 */
 			iterator insert( const_iterator itr, const T & value )
 			{
 				auto new_insert = new Node( value, (itr.current) -> prev, itr.current );
@@ -585,13 +624,32 @@ namespace ls
 				return iterator(new_insert);
 			}
 
+			/**
+			 * @brief      Inserts an initiliazer list at a position provided by
+			 *             the client.
+			 *
+			 * @param[in]  pos    Where the initializer list will be inserted.
+			 * @param[in]  ilist  The initializer list that the client wants to
+			 *                    stored.
+			 *
+			 * @return     Iterator to where the initializer list began its
+			 *             insertion.
+			 */
 			iterator insert( const_iterator pos, std::initializer_list<T> ilist )
 			{
 				for( auto i = ilist.begin(); i != ilist.end(); ++i )	
 					insert(pos, *i);
 				return iterator(pos.current);
 			}
-			
+
+			/**
+			 * @brief      Erases an element from the list at an address
+			 *             provided by the client.
+			 *
+			 * @param[in]  itr   The address of the node to be deleted.
+			 *
+			 * @return     Iterator to the element that "filled the gap".
+			 */
 			iterator erase( const_iterator itr )
 			{
 				if( itr != cend() )
@@ -607,11 +665,26 @@ namespace ls
 				return iterator(itr.current);
 			}
 
+			/**
+			 * @brief      Erases elements that are in the range provided by the
+			 *             client.
+			 *
+			 * @param[in]  first  Where the range begins.
+			 * @param[in]  last   Where it ends.
+			 * 
+			 */
 			iterator erase( const_iterator first, const_iterator last )
 			{
 				for( auto i = first; i != last; ++i ) erase(i);
 			}
-			
+
+			/**
+			 * @brief      Searches for the first match.
+			 *
+			 * @param[in]  value  The value to be searched.
+			 *
+			 * @return     Position of the found element or m_tail.
+			 */
 			const_iterator find( const T & value ) const
 			{
 				auto curr = m_head;
