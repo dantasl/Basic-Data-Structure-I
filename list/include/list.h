@@ -1,3 +1,11 @@
+/**
+ * @file    list.h
+ * @brief   Defining and implementing functions for ADT Double Linked List.
+ * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
+ * @since   26/11/2017
+ * @date    26/11/2017
+ */
+
 #ifndef _LIST_H_
 #define _LIST_H_
 
@@ -32,12 +40,21 @@ namespace ls
 					friend class list<T>;
 
 				public:
+					
+					/**					
+					 * @brief      Dereferencing operator.
+					 *
+					 * @return     Content of attribute current.
+					 */
 					const T & operator*() const
 					{
 						assert( current != nullptr );
 						return current->data;
 					}
-					
+
+					/**
+					 * @brief      Pre-increment operator.
+					 */
 					const_iterator & operator++() // ++it;
 					{
 						assert( current != nullptr );
@@ -45,6 +62,9 @@ namespace ls
 						return *this;
 					}
 
+					/**
+					 * @brief      Post-increment operator.
+					 */
 					const_iterator operator++( int ) // it++;
 					{
 						assert( current != nullptr );
@@ -52,7 +72,10 @@ namespace ls
 						current = current -> next;
 						return temp;
 					}
-					
+
+					/**
+					 * @brief      Pre-decrement operator.
+					 */
 					const_iterator & operator--() // --it;
 					{
 						assert( current != nullptr );
@@ -60,6 +83,9 @@ namespace ls
 						return *this;
 					}
 
+					/**
+					 * @brief      Post-decrement operator.
+					 */
 					const_iterator operator--( int ) // it--;
 					{
 						assert( current != nullptr );
@@ -68,11 +94,29 @@ namespace ls
 						return temp;
 					}
 
+					/**
+					 * @brief      Equality operator. Checks if the data stored on this
+					 *             instance of const_iterator is equal to another
+					 *             const_iterator.
+					 *
+					 * @param[in]  rhs   Another instance to be checked.
+					 *
+					 * @return     True if they are equals. False otherwise.
+					 */
 					bool operator==( const const_iterator & rhs ) const
 					{
 						return current == rhs.current;
 					}
-					
+
+					/**
+					 * @brief      Non-equality operator. Checks if the data stored on
+					 *             this instance of const_iterator is different to
+					 *             another const_iterator.
+					 *
+					 * @param[in]  rhs   Another instance to be checked.
+					 *
+					 * @return     True if they are different. False otherwise.
+					 */					
 					bool operator!=( const const_iterator & rhs ) const
 					{
 						return current != rhs.current;
@@ -82,24 +126,45 @@ namespace ls
 			class iterator : public const_iterator
 			{
 				protected:
+					/**
+					 * @brief      Default constructor for iterator.
+					 *
+					 * @param      p     Node to initialize iterator.
+					 */
 					iterator( Node *p ) : const_iterator( p ) { /*empty */ }
 					friend class list<T>;
 
 				public:
+					/**
+					 * @brief     Default empty constructor.
+					 */
 					iterator() : const_iterator() { /* Empty */ }
-					
+
+					/**
+					 * @brief      Dereferencing operator.
+					 *
+					 * @return     Constant reference to the content stored.
+					 */
 					const T & operator*() const
 					{
 						assert( const_iterator::current != nullptr );
 						return const_iterator::current->data;
 					}
-					
+
+					/**
+					 * @brief      Dereferencing operator.
+					 *
+					 * @return     Reference to the content stored.
+					 */
 					T & operator*()
 					{
 						assert( const_iterator::current != nullptr );
 						return const_iterator::current->data;
 					}
 
+					/**
+					 * @brief      Pre-increment operator.
+					 */
 					iterator & operator++() // ++it;
 					{
 						assert( const_iterator::current != nullptr );
@@ -107,6 +172,9 @@ namespace ls
 						return *this;
 					}
 
+					/**
+					 * @brief      Post-increment operator.
+					 */
 					iterator operator++( int ) // it++;
 					{
 						assert( const_iterator::current != nullptr );
@@ -115,13 +183,19 @@ namespace ls
 						return temp;
 					}
 
+					/**
+					 * @brief      Pre-decrement operator.
+					 */
 					iterator & operator--() // --it;
 					{
 						assert( const_iterator::current != nullptr );
 						const_iterator::current = const_iterator::current -> prev;
 						return *this;
 					}
-					
+
+					/**
+					 * @brief      Post-decrement operator.
+					 */
 					iterator operator--( int ) // it--;
 					{
 						assert( const_iterator::current != nullptr );
@@ -132,6 +206,10 @@ namespace ls
 			};
 
 			/// [I] SPECIAL MEMBERS
+			
+			/**
+			 * @brief      Default constructor. Creates an empty list.
+			 */
 			list()
 				: m_size( 0 )
 				, m_head( new Node() )
@@ -141,6 +219,12 @@ namespace ls
 				m_tail -> prev = m_head;
 			}
 
+			/**
+			 * @brief      Constructs the list with count default-inserted
+			 *             instances of T.
+			 *
+			 * @param[in]  count  Number of instances to be created.
+			 */
 			explicit list( unsigned long count )
 				: m_size( 0 )
 				, m_head( new Node() )
@@ -153,6 +237,15 @@ namespace ls
 					push_back( T() );
 			}
 
+			/**
+			 * @brief      Constructs the list with the contents of the range
+			 *             [first, last).
+			 *
+			 * @param[in]  first    Where the range starts.
+			 * @param[in]  last     Where it ends.
+			 *
+			 * @tparam     InputIt  Iterator to the list.
+			 */
 			template < typename InputIt >
 			list( InputIt first, InputIt last )
 				: m_size( 0 )
@@ -164,8 +257,14 @@ namespace ls
 
 				for( auto i = first; i != last; ++i )
 					push_back(*i);
-			}			
-			
+			}
+
+			/**
+			 * @brief      Copy constructor. Constructs the list with the deep
+			 *             copy of the contents of other.
+			 *
+			 * @param[in]  other  List to be copied.
+			 */
 			list( const list & other )
 				: m_size( 0 )
 				, m_head( new Node() )
@@ -178,6 +277,12 @@ namespace ls
 					push_back(*i);
 			}
 
+			/**
+			 * @brief      Constructs the list with the contents of the
+			 *             initializer list init
+			 *
+			 * @param[in]  ilist  Initiliazer list to be copied.
+			 */
 			list( std::initializer_list<T> ilist )
 				: m_size( 0 )
 				, m_head( new Node() )
@@ -190,13 +295,24 @@ namespace ls
 					push_back(*i);	
 			}
 
+			/**
+			 * @brief      Destructs the list. The destructors of the elements
+			 *             are called and the used storage is deallocated.
+			 */
 			~list()
 			{
 				clear();
 				delete m_head;
 				delete m_tail;
 			}
-			
+
+			/**
+			 * @brief      Copy assignment operator. Replaces the contents with
+			 *             a copy of the contents of other
+			 *
+			 * @param[in]  other  List to be copied
+			 *   
+			 */
 			list & operator= ( const list & other )
 			{
 				clear();
@@ -205,6 +321,13 @@ namespace ls
 				return *this;
 			}
 
+			/**
+			 * @brief      Replaces the contents with those identified by
+			 *             initializer list ilist
+			 *
+			 * @param[in]  ilist  The initializer list to be copied.
+			 *
+			 */
 			list & operator= (std::initializer_list<T> ilist)
 			{
 				clear();
@@ -214,38 +337,80 @@ namespace ls
 			}	
 
 			/// [II] ITERATORS
+			
+			/**
+			 * @brief      This function retrieves the reference for the address
+			 *             of the beginning of the list.
+			 *
+			 * @return     Iterator to begin.
+			 */
 			iterator begin(void)
 			{
 				return iterator(m_head -> next);
 			}
-			
+
+			/**
+			 * @brief      This function retrieves the constant reference for
+			 *             the address of the beginning of the list.
+			 *
+			 * @return     const_iterator to begin.
+			 */			
 			const_iterator cbegin(void) const
 			{
 				return const_iterator(m_head -> next);
 			}
-			
+
+			/**
+			 * @brief      This function retrieves the reference for the address
+			 *             of the ending of the list.
+			 *
+			 * @return     Iterator to end.
+			 */			
 			iterator end(void)
 			{
 				return iterator(m_tail);
 			}
-			
+
+			/**
+			 * @brief      This function retrieves the constant reference for
+			 *             the address of the ending of the list.
+			 *
+			 * @return     const_iterator to end.
+			 */			
 			const_iterator cend(void) const
 			{
 				return const_iterator(m_tail);
 			}
 
 			/// [III] CAPACITY
+			
+			/**
+			 * @brief      Gets the number of elements stored in this list.
+			 *
+			 * @return     Size of the list.
+			 */
 			int size() const
 			{
 				return m_size;
 			}
-			
+
+			/**
+			 * @brief      Checks if the list is empty.
+			 *
+			 * @return     True if size's equal to zero. False, otherwise.
+			 */
 			bool empty() const
 			{
 				return m_size == 0;
 			}
 
 			/// [IV] MODIFIERS
+			
+			/**
+			 * @brief      This function iterates over each element of the list
+			 *             and deletes it. Then, resets m_head, m_tail and
+			 *             m_size to their first configuration.
+			 */
 			void clear()
 			{
 				if( empty() )
@@ -260,7 +425,13 @@ namespace ls
 				m_tail -> prev = m_head;
 				m_size = 0;
 			}
-			
+
+			/**
+			 * @brief      Retrieves the front element of the list i.e the
+			 *             m_head's next element.
+			 *
+			 * @return     Front element of the list.
+			 */
 			T & front()
 			{
 				if( empty() )
@@ -268,6 +439,12 @@ namespace ls
 				return m_head -> next -> data;
 			}
 
+			/**
+			 * @brief      Retrieves as constant the front element of the list
+			 *             i.e. the m_head's next element.
+			 *
+			 * @return     Constant front element of the list.
+			 */
 			const T & front() const
 			{
 				if( empty() )
@@ -275,6 +452,12 @@ namespace ls
 				return m_head -> next -> data;
 			}
 
+			/**
+			 * @brief      Retrieves the back element of the list i.e. the
+			 *             m_tail's previous element.
+			 *
+			 * @return     Back element of the list.
+			 */
 			T & back()
 			{
 				if( empty() )
@@ -282,6 +465,12 @@ namespace ls
 				return m_tail -> prev -> data;
 			}
 
+			/**
+			 * @brief      Retrieves as constant the back element of the list
+			 *             i.e. the m_tail's previous element.
+			 *
+			 * @return     Constant back element of the list.
+			 */
 			const T & back() const
 			{
 				if( empty() )
@@ -289,6 +478,15 @@ namespace ls
 				return m_tail -> prev -> data;
 			}
 
+			/**
+			 * @brief      Pushes a new element to the list's front. Creates a
+			 *             new node with the same m_head's next. Updates the
+			 *             actual front element to point as previous element the
+			 *             new node and then updates the m_head to point as next
+			 *             the new node.
+			 *
+			 * @param[in]  value  Content of the element to be pushed.
+			 */
 			void push_front( const T & value )
 			{
 				auto new_node = new Node(value, m_head, m_head->next);
@@ -297,6 +495,11 @@ namespace ls
 				++m_size;
 			}
 
+			/**
+			 * @brief      Pushes a new element to the list's back. Creates a new node wit
+			 *
+			 * @param[in]  value  The value
+			 */
 			void push_back( const T & value )
 			{
 				if ( empty() ) push_front(value);
@@ -309,6 +512,10 @@ namespace ls
 				}				
 			}
 
+			/**
+			 * @brief      Removes the first element and updates the list's
+			 *             linkage.
+			 */
 			void pop_front()
 			{
 				if( empty() )
@@ -320,6 +527,10 @@ namespace ls
 				--m_size;
 			}
 
+			/**
+			 * @brief      Removes the last element and updates the list's
+			 *             linkage.
+			 */
 			void pop_back()
 			{
 				if ( empty() )
@@ -332,6 +543,11 @@ namespace ls
 				--m_size;
 			}
 
+			/**
+			 * @brief      All
+			 *
+			 * @param[in]  value  The value
+			 */
 			void assign( const T& value )
 			{
 				auto curr = m_head -> next;

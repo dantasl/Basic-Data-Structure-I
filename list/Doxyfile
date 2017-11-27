@@ -1,4 +1,4 @@
-PROJECT_NAME = "Implementing ADT - List"
+PROJECT_NAME = "Implementing ADT - Double Linked List"
 PROJECT_BRIEF = EDBI - Dantas L.
 OUTPUT_LANGUAGE	= English
 RECURSIVE = YES
