@@ -1,7 +1,18 @@
+/**
+ * @file    driver_list.cpp
+ * @brief   Testing functions implemented in list.h
+ * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
+ * @date    27/11/2017 
+ * @since   26/11/2017
+ */
+
 #include <iostream>
 #include <cassert>
 #include <initializer_list>
 #include "list.h"
+
+using std::cout;
+using std::endl;
 
 int main(int argc, char const *argv[])
 {
@@ -102,7 +113,25 @@ int main(int argc, char const *argv[])
 		auto f = l2.find(89);
 		assert( *f == 89 );
 		f = l2.find(1200);
-		//assert( f == nullptr );
-		std::cout << *f << std::endl;
+		assert( f == l2.end() );
+
+		// Testing erase()
+		l2.erase( l2.begin() );
+		assert( l2.size() == 8 );
+		assert( l2.front() == 10 );
+		l2.erase( --l2.end() );
+		assert( l2.size() == 7 );
+		assert( l2.back() == 30 );
+
+		// Testing erase() with range
+		auto er = l2.begin(); er++; er++; er++;
+		l2.erase( l2.begin(), er );
+
+		check = { 2, 89, 3, 30 };
+		j = check.begin();
+
+		for(auto i = l2.begin(); i != l2.end(); ++i, ++j) assert( (*i) == (*j) );
 	}
+
+	cout << endl << "If you are seeing this message, my ls::list passed all the tests." << endl << endl;
 }
