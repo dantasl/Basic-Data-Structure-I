@@ -124,7 +124,7 @@ int main(int argc, char const *argv[])
 		assert( l2.back() == 30 );
 
 		// Testing erase() with range
-		auto er = l2.begin(); er++; er++; er++;
+		ls::list<int>::iterator er = l2.begin(); er++; er++; er++;
 		l2.erase( l2.begin(), er );
 
 		check = { 2, 89, 3, 30 };
