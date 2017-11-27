@@ -1,6 +1,6 @@
-# Abstract Data Type - Implementing a Vector
+# Abstract Data Type - Implementing a Double Linked List
 
-In the present repository I'm storing the codes created to implement a Vector.
+In the present repository I'm storing the codes created to implement a double linked list.
 
 <b>Lucas Gomes Dantas</b> (<dantaslucas@ufrn.edu.br>), student in the <b>Basic Data Structure I</b> class of <b>Prof. Dr. Selan
 Rodrigues dos Santos</b> at <b>Federal University of Rio Grande do Norte</b>.
@@ -12,15 +12,15 @@ Rodrigues dos Santos</b> at <b>Federal University of Rio Grande do Norte</b>.
 * Type `make init` to create the project structure;
 * Type `make` to compile the project.
 
-There is already a driver testing some of the vector's functions. If you want to run this file, type: <code>./bin/vector</code>
+There is already a driver testing some of the list's functions. If you want to run this file, type: <code>./bin/list</code>
 
 ## Including and using library
 
-To use this library, you have to include the `vector.h` into your application. These vectors are instantiated as following:
+To use this library, you have to include the `list.h` into your application. The list is instantiated as following:
 
-* `sc::vector<T> v`
+* `ls::list<T> v`
 
-Where `sc` is the namespace (stands for sequential container), `<T>` is a type (e.g. string, int, float, double, etc.),  and 
+Where `ls` is the namespace (stands for list), `<T>` is a type (e.g. string, int, float, double, etc.),  and 
 `v` is the elements name.
 
 ## Possible errors and exceptions
@@ -29,8 +29,8 @@ While testing this library, the user may be confronted with the following errors
 
 * `std::out_of_range`
 
-It appears when the program tries to access an element out of the vector's boundaries. e.g. Tried to `pop_back()` or
-`pop_front` element of an empty vector. In any of these cases, a message informing the user about the occurred problem
+It appears when the program tries to access an element that's not on the list. e.g. Tried to `pop_back()` or
+`pop_front` element of an empty list. In any of these cases, a message informing the user about the occurred problem
 will be displayed.
 
 ## License
