@@ -334,6 +334,8 @@ namespace ls
 
 			void assign( const T& value )
 			{
+				if ( empty() )
+					throw std::out_of_range("Unnable to make this assignment on an empty list. \n");
 				auto curr = m_head -> next;
 				while( curr -> next != nullptr )
 				{
