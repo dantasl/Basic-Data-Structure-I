@@ -2,6 +2,7 @@
 #define _LIST_H_
 
 #include <cassert>
+#include <initializer_list>
 
 namespace ls
 {
@@ -41,7 +42,7 @@ namespace ls
 					{
 						assert( current != nullptr );
 						current = current -> next;
-						return current;
+						return *this;
 					}
 
 					const_iterator operator++( int ) // it++;
@@ -56,7 +57,7 @@ namespace ls
 					{
 						assert( current != nullptr );
 						current = current -> prev;
-						return current;
+						return *this;
 					}
 
 					const_iterator operator--( int ) // it--;
@@ -140,6 +141,55 @@ namespace ls
 				m_tail -> prev = m_head;
 			}
 
+			explicit list( unsigned long count )
+				: m_size( 0 )
+				, m_head( new Node() )
+				, m_tail( new Node() )
+			{
+				m_head -> next = m_tail;
+				m_tail -> prev = m_head;
+
+				for( auto i(0u); i < count; ++i )
+					push_back( T() );
+			}
+
+			template < typename InputIt >
+			list( InputIt first, InputIt last )
+				: m_size( 0 )
+				, m_head( new Node() )
+				, m_tail( new Node() )
+			{
+				m_head -> next = m_tail;
+				m_tail -> prev = m_head;
+
+				for( auto i = first; i != last; ++i )
+					push_back(*i);
+			}			
+			
+			list( const list & other )
+				: m_size( 0 )
+				, m_head( new Node() )
+				, m_tail( new Node() )
+			{
+				m_head -> next = m_tail;
+				m_tail -> prev = m_head;
+
+				for( auto i = other.cbegin() ; i != other.cend() ; ++i )
+					push_back(*i);
+			}
+
+			list( std::initializer_list<T> ilist )
+				: m_size( 0 )
+				, m_head( new Node() )
+				, m_tail(new Node() )
+			{
+				m_head -> next = m_tail;
+				m_tail -> prev = m_head;
+
+				for(auto i = ilist.begin(); i != ilist.end(); ++i)
+					push_back(*i);	
+			}
+
 			~list()
 			{
 				clear();
@@ -147,30 +197,39 @@ namespace ls
 				delete m_tail;
 			}
 			
-			list( const list & )
+			list & operator= ( const list & other )
 			{
-
+				clear();
+				for(auto i = other.cbegin(); i != other.cend(); ++i)
+					push_back(*i);
+				return *this;
 			}
-			
-			list & operator= ( const list & );
+
+			list & operator= (std::initializer_list<T> ilist)
+			{
+				clear();
+				for(auto i = ilist.begin(); i != ilist.end(); ++i)
+					push_back(*i);
+				return *this;
+			}	
 
 			/// [II] ITERATORS
-			iterator begin()
+			iterator begin(void)
 			{
 				return iterator(m_head -> next);
 			}
 			
-			const_iterator cbegin() const
+			const_iterator cbegin(void) const
 			{
 				return const_iterator(m_head -> next);
 			}
 			
-			iterator end()
+			iterator end(void)
 			{
 				return iterator(m_tail);
 			}
 			
-			const_iterator cend() const
+			const_iterator cend(void) const
 			{
 				return const_iterator(m_tail);
 			}
@@ -190,12 +249,12 @@ namespace ls
 			void clear()
 			{
 				if( empty() )
-					throw std::out_of_range("Unnable to clear an empty list. \n");
-				auto curr = m_head -> next -> next;
+					return;
+				auto curr(m_head -> next);
 				while( curr != m_tail )
 				{
-					delete curr -> prev;
 					curr = curr -> next;
+					delete curr -> prev;
 				}
 				m_head -> next = m_tail;
 				m_tail -> prev = m_head;
@@ -229,14 +288,15 @@ namespace ls
 					throw std::out_of_range("Unnable to access back element of an empty list. \n");
 				return m_tail -> prev -> data;
 			}
-			
+
 			void push_front( const T & value )
 			{
-				m_head -> next = new Node(value, m_head, m_head->next);
-				if ( empty() ) m_tail -> prev = m_head -> next;
+				auto new_node = new Node(value, m_head, m_head->next);
+				m_head -> next -> prev = new_node;
+				m_head -> next = new_node;
 				++m_size;
 			}
-			
+
 			void push_back( const T & value )
 			{
 				if ( empty() ) push_front(value);
@@ -287,18 +347,16 @@ namespace ls
 			template < class InItr >
 			void assign( InItr first, InItr last )
 			{
-				auto aux = first;
-				auto curr = m_head;
-				while( aux != last or curr -> next != m_tail )
-				{
-					curr -> data = *aux++;
-					curr = curr -> next;
-				}				
-				while( aux != last ) push_back(*aux++);	 // Consumes the rest of the assignment
-				      
+				clear();
+				for(auto i = first; i != last; ++i) push_back(*i);				      
 			}
 
-			void assign( std::initializer_list<T> ilist );
+			void assign( std::initializer_list<T> ilist )
+			{
+				clear();
+				for(auto i = ilist.begin(); i != ilist.end(); ++i)
+					push_back(*i);
+			}
 			
 			iterator insert( const_iterator itr, const T & value )
 			{
@@ -308,10 +366,40 @@ namespace ls
 				return iterator(new_insert);
 			}
 
-			iterator insert( const_iterator pos, std::initializer_list<T> ilist );
-			iterator erase( const_iterator itr );
-			iterator erase( const_iterator first, const_iterator last );
-			const_iterator find( const T & value ) const;
+			iterator insert( const_iterator pos, std::initializer_list<T> ilist )
+			{
+				for( auto i = ilist.begin(); i != ilist.end(); ++i )
+					insert(pos, *i);
+				return iterator(pos.current);
+			}
+			
+			iterator erase( const_iterator itr )
+			{
+				if( itr != cend() )
+				{
+					auto before = ( itr.current ) -> prev;
+					auto after = ( itr.current ) -> next;
+					before -> next = after;
+					after -> prev = before;
+					m_size--;
+					delete itr.current;
+					return iterator(after);
+				}	
+				return iterator(itr.current);
+			}
+
+			iterator erase( const_iterator first, const_iterator last )
+			{
+				for( auto i = first; i != last; ++i ) erase(*i);
+			}
+			
+			const_iterator find( const T & value ) const
+			{
+				auto curr = m_head;
+				while( curr != m_tail and curr -> data != value )
+					curr = curr -> next;
+				return curr;		
+			}
 
 		private:
 			int m_size;
