@@ -32,7 +32,7 @@ list: $(OBJ_DIR)/main.o
 	@echo "+++ [Executable list created in $(BIN_DIR)] +++"
 	@echo "============="
 
-$(OBJ_DIR)/main.o: $(SRC_DIR)/list.cpp
+$(OBJ_DIR)/main.o: $(SRC_DIR)/driver_list.cpp
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 doxy:

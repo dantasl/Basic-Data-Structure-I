@@ -550,6 +550,8 @@ namespace ls
 			 */
 			void assign( const T& value )
 			{
+				if ( empty() )
+					throw std::out_of_range("Unnable to make this assignment on an empty list. \n");
 				auto curr = m_head -> next;
 				while( curr -> next != nullptr )
 				{
@@ -579,12 +581,13 @@ namespace ls
 				auto new_insert = new Node( value, (itr.current) -> prev, itr.current );
 				( ( itr.current ) -> prev) -> next = new_insert;
 				( itr.current ) -> prev = new_insert;
+				m_size++;
 				return iterator(new_insert);
 			}
 
 			iterator insert( const_iterator pos, std::initializer_list<T> ilist )
 			{
-				for( auto i = ilist.begin(); i != ilist.end(); ++i )
+				for( auto i = ilist.begin(); i != ilist.end(); ++i )	
 					insert(pos, *i);
 				return iterator(pos.current);
 			}
@@ -606,7 +609,7 @@ namespace ls
 
 			iterator erase( const_iterator first, const_iterator last )
 			{
-				for( auto i = first; i != last; ++i ) erase(*i);
+				for( auto i = first; i != last; ++i ) erase(i);
 			}
 			
 			const_iterator find( const T & value ) const
