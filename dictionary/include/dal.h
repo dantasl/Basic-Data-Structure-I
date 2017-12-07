@@ -42,27 +42,39 @@ namespace ac
 				
 				virtual ~DAL () { delete [] mpt_Data; }
 
-				int capacity( void )
+				int capacity( void ) const
 				{
 					return mi_Capacity;
 				}
 
-				bool remove ( const Key & _x, Data & _s ) // perguntar a selan se deixa o buraco ou não
+				bool empty( void ) const
 				{
-					if ( mi_Length == 0 ) return false;
+					return mi_Length == 0;
+				}
+
+				bool remove ( const Key & _x, Data & _s )
+				{
+					if ( empty() ) return false;
 					auto found_position = _search(_x);
 					if ( found_position == -1 ) return false;
-
+					
+					// If the found element is at the end of the dictionary, don't need to fill gap
+					if ( found_position == (mi_Length - 1) )						 
+						_s = mpt_Data[found_position].info;
+					else // Otherwise, we need to fill the gap with the last element of the dictionary
+					{
+						_s = mpt_Data[found_position].info;
+						mpt_Data[found_position] = mpt_Data[mi_Length - 1];
+					}			
+					
+					mi_Length--;
 					return true;
 				}
 				
 				bool search ( const Key & _x, Data & _s ) const
 				{
-					//Check if table is empty;
-					if ( mi_Length == 0 ) return false;
-
+					if ( empty() ) return false;
 					auto found_position = _search(_x);
-
 					if ( found_position == -1 ) return false;
 					_s = mpt_Data[found_position].info;
 					return true;
@@ -85,10 +97,55 @@ namespace ac
 					return true;
 				}
 				
-				Key min () const;
-				Key max () const;
-				bool sucessor ( const Key & _x, Key & _y ) const;
-				bool predecessor ( const Key _x, Key & _y ) const;
+				Key min () const
+				{
+					if ( mi_Length == 0 ) throw std::out_of_range("Cannot find min key on an empty dictionary.");
+					KeyComparator comp;
+					auto curr_min = mpt_Data[0].id;
+					for( auto i(0); i != mi_Length; ++i )
+					{
+						if( comp( mpt_Data[i].id, curr_min ) ) curr_min = mpt_Data[i].id;
+					}
+					return curr_min;
+				}
+				
+				Key max () const
+				{
+					if ( mi_Length == 0 ) throw std::out_of_range("Cannot find max key on an empty dictionary.");
+					KeyComparator comp;
+					auto curr_max = mpt_Data[0].id;
+					for( auto i(0); i != mi_Length; ++i )
+					{
+						if ( not comp( mpt_Data[i].id, curr_max ) ) curr_max = mpt_Data[i].id;
+					}
+					return curr_max;
+				}
+
+				bool successor ( const Key & _x, Key & _y ) const
+				{
+					if ( mi_Length == 0 ) return false;
+					KeyComparator comp;
+					Key curr_suc = _x;
+					for( auto i(0); i != mi_Length; ++i )
+					{
+						if ( not comp( curr_suc, mpt_Data[i].id ) ) curr_suc = mpt_Data[i].id;
+					}
+					_y = curr_suc;
+					return true;
+				}
+
+				bool predecessor ( const Key _x, Key & _y ) const
+				{
+					if ( mi_Length == 0 ) return false;
+					KeyComparator comp;
+					Key curr_pre = _x;
+					for( auto i(0); i != mi_Length; ++i )
+					{
+						if ( comp( curr_pre, mpt_Data[i].id ) ) curr_pre = mpt_Data[i].id;
+					}
+					_y = curr_pre;
+					return true;	
+				}
 
 				inline friend
 				std::ostream &operator<< ( std::ostream& _os, const DAL& _oList )
