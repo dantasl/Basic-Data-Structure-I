@@ -20,7 +20,7 @@ To use this library, you have to include the `hashtbl.h` into your application. 
 
 * `ac::HashTbl<KeyType, DataType, KeyHash, KeyEqual> hs`
 
-Where `ac` is the namespace (stands for associative container), `<KeyType>` is the element's key, `DataType` is the value of the element, `KeyHash` is the functor to hash the key provided by the client (default function is std::hash),`KeyEqual` is the functor of comparison (default funtion is std::equal_to) and `hs` is the hash_table's name.
+Where `ac` is the namespace (stands for associative container), `<KeyType>` is the element's key, `DataType` is the value of the element, `KeyHash` is the functor to hash the key provided by the client (default function is std::hash),`KeyEqual` is the functor of comparison (default function is std::equal_to) and `hs` is the hash_table's name.
 
 ## Possible errors and exceptions
 
