@@ -1,3 +1,11 @@
+/**
+ * @file    dal.h
+ * @brief   Defining and implementing functions for DAL.
+ * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
+ * @since   06/12/2017
+ * @date    07/12/2017
+ */
+
 #ifndef _DAL_H_
 #define _DAL_H_
 
@@ -34,19 +42,38 @@ namespace ac
 
 			public:
 				
+				/**
+				 * @brief      { function_description }
+				 *
+				 * @param[in]  _MaxSz  The maximum size
+				 */
 				DAL ( int _MaxSz = SIZE )
 					: mi_Length(0)
 					, mi_Capacity(_MaxSz)
 					, mpt_Data( new NodeAL[_MaxSz] )
 					{ /* empty */ }
 				
+				/**
+				 * @brief      Destroys the object.
+				 */
 				virtual ~DAL () { delete [] mpt_Data; }
 
+				/**
+				 * @brief      Retrieves the dictionary's maximum size.
+				 *
+				 * @return     Total capacity of the dictionary.
+				 */
 				int capacity( void ) const
 				{
 					return mi_Capacity;
 				}
 
+				/**
+				 * @brief      Checks if the dictionary is empty or not.
+				 *
+				 * @return     True if no elements are stored in the dictionary.
+				 *             False otherwise.
+				 */
 				bool empty( void ) const
 				{
 					return mi_Length == 0;
@@ -96,7 +123,13 @@ namespace ac
 
 					return true;
 				}
-				
+
+				/**
+				 * @brief      This function iterates over each element on the
+				 *             dictionary and searches for the minimum key.
+				 *
+				 * @return     The minimum key.
+				 */				
 				Key min () const
 				{
 					if ( mi_Length == 0 ) throw std::out_of_range("Cannot find min key on an empty dictionary.");
@@ -108,9 +141,16 @@ namespace ac
 					}
 					return curr_min;
 				}
-				
+
+				/**
+				 * @brief      This function iterates over each element on the
+				 *             dictionary and searches for the maximum key.
+				 *
+				 * @return     The maximum key.
+				 */
 				Key max () const
 				{
+					// Check if dictionary is empty
 					if ( mi_Length == 0 ) throw std::out_of_range("Cannot find max key on an empty dictionary.");
 					KeyComparator comp;
 					auto curr_max = mpt_Data[0].id;

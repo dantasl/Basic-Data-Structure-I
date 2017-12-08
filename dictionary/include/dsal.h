@@ -1,3 +1,11 @@
+/**
+ * @file    dsal.h
+ * @brief   Defining and implementing functions for DSAL.
+ * @author  Lucas Gomes Dantas (dantaslucas@ufrn.edu.br)
+ * @since   06/12/2017
+ * @date    07/12/2017
+ */
+
 #ifndef _DSAL_H_
 #define _DSAL_H_
 
@@ -5,10 +13,28 @@
 
 namespace ac
 {
+	/**
+	 * @brief      Class for Dictionary with Sorted Array List
+	 *
+	 * @tparam     Key            Key of the element.
+	 * @tparam     Data           Value associated to key.
+	 * @tparam     KeyComparator  Functor to compare keys.
+	 */
 	template< typename Key, typename Data, typename KeyComparator = std::less<Key> >
 	class DSAL : public DAL<Key, Data, KeyComparator>
 	{
 		protected:
+
+			/**
+			 * @brief      Auxiliary search function. Utilizes binary search to
+			 *             find a key and return its position in this
+			 *             dictionary.
+			 *
+			 * @param[in]  _x    The key to search an element.
+			 *
+			 * @return     The position of the found element (if able to find)
+			 *             or -1 in case search fails.
+			 */
 			int _search ( const Key & _x ) const
 			{
 				KeyComparator comp;
@@ -31,12 +57,32 @@ namespace ac
 			}
 
 		public:			
+			
+			/**
+			 * @brief      Default constructor.
+			 *
+			 * @param[in]  _MaxSz  Size of the dictionary.
+			 */
 			DSAL( int _MaxSz = DAL<Key, Data, KeyComparator>::SIZE )
 				: DAL< Key, Data, KeyComparator > ( _MaxSz )
 			{ /* empty */ }
 
+			/**
+			 * @brief      Destroys the object.
+			 */
 			virtual ~DSAL() { /* empty */ }
 
+			/**
+			 * @brief      Removes an element of this dictionary by its key.
+			 *
+			 * @param[in]  _x    Key provided by the client for the element to
+			 *                   be removed.
+			 * @param      _s    If the key was found, its data will be
+			 *                   retrieved inside _s and the client will be able
+			 *                   to access it.
+			 *
+			 * @return     True if able to remove element. False otherwise.
+			 */
 			bool remove ( const Key & _x, Data & _s )
 			{
 				// Checks if dictionary is empty
@@ -68,6 +114,15 @@ namespace ac
 				return true;
 			}
 
+			/**
+			 * @brief      Inserts a key and its associate value in this
+			 *             dictionary.
+			 *
+			 * @param[in]  _newKey   The new key to be added.
+			 * @param[in]  _newInfo  The associated information.
+			 *
+			 * @return     True if able to insert the key-data. False otherwise.
+			 */
 			bool insert ( const Key & _newKey, const Data & _newInfo )
 			{
 				auto capacity = DAL<Key, Data, KeyComparator>::mi_Capacity;
@@ -132,6 +187,13 @@ namespace ac
 				}
 			}
 
+			/**
+			 * @brief      Finds minimum key in this dictionary. Since in this
+			 *             version a sorted array is being used, the minimum key
+			 *             would be at the beginning of the dictionary.
+			 *
+			 * @return     Mininum key.
+			 */
 			Key min( void ) const
 			{
 				if ( DAL<Key, Data, KeyComparator>::mi_Length == 0 )
@@ -139,6 +201,13 @@ namespace ac
 				return DAL<Key, Data, KeyComparator>::mpt_Data[0].id;
 			}
 
+			/**
+			 * @brief      Finds maximum key in this dictionary. Since in this
+			 *             version a sorted array is being used, the maximum key
+			 *             would be at the ending of the dictionary.
+			 *
+			 * @return     Maximum key.
+			 */
 			Key max( void ) const
 			{
 				auto len = DAL<Key, Data, KeyComparator>::mi_Length;
@@ -147,6 +216,16 @@ namespace ac
 				return DAL<Key, Data, KeyComparator>::mpt_Data[len - 1].id;
 			}
 
+			/**
+			 * @brief      Finds a key that is the immediate successor to
+			 *             another provided by the client.
+			 *
+			 * @param[in]  _x    Key to find its successor.
+			 * @param      _y    Where the successor's key will be stored and
+			 *                   used by the client.
+			 *
+			 * @return     True if able to find a successor. False otherwise.
+			 */
 			bool successor ( const Key & _x, Key & _y ) const
 			{
 				if ( DAL<Key, Data, KeyComparator>::empty() ) return false;
@@ -157,6 +236,16 @@ namespace ac
 				return true;
 			}
 
+			/**
+			 * @brief      Finds a key that is the immediate predecessor to
+			 *             another provided by the client.
+			 *
+			 * @param[in]  _x    Key to find its predecessor.
+			 * @param      _y    where the predecessor's key will be stored and
+			 *                   used by the client.
+			 *
+			 * @return     True if able to find a predecessor. False otherwise.
+			 */
 			bool predecessor ( const Key & _x, Key & _y ) const
 			{
 				if ( DAL<Key, Data, KeyComparator>::empty() ) return false;
