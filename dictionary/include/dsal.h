@@ -152,7 +152,7 @@ namespace ac
 				if ( DAL<Key, Data, KeyComparator>::empty() ) return false;
 				// Check if the provided key is in dictionary or is the last element of the dictionary.
 				auto s = _search(_x);
-				if ( s == -1 or s == DAL<Key, Data, KeyComparator>::mi_Length ) return false;
+				if ( s == -1 or s == DAL<Key, Data, KeyComparator>::mi_Length - 1) return false;
 				_y = DAL<Key, Data, KeyComparator>::mpt_Data[s + 1].id;
 				return true;
 			}
