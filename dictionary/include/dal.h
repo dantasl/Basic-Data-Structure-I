@@ -11,12 +11,22 @@
 
 namespace ac
 {
+	/**
+	 * @brief      Class for Dictionary with Array List.
+	 *
+	 * @tparam     Key            Key of the element.
+	 * @tparam     Data           Value associated to the key.
+	 * @tparam     KeyComparator  Functor to compare keys.
+	 */
 	template< typename Key, typename Data, typename KeyComparator = std::less<Key> >
 	class DAL
 	{
 		protected:
 			
-			struct NodeAL // Node structure representing pair key-information
+			/**
+			 * @brief      Node structure representing pair key-information
+			 */
+			struct NodeAL 
 			{
 				Key id; // The key is a simple integer
 				Data info; // The information is a chain of chars
@@ -27,7 +37,16 @@ namespace ac
 			int mi_Capacity;		  // Maximum storage capacity
 			NodeAL *mpt_Data;			  // Storage area: dinamic allocated array
 
-			// Auxiliar search
+			/**
+			 * @brief      Auxiliar search. Receives a key and return its
+			 *             position on the dictionary, if found. Otherwise,
+			 *             returns -1.
+			 *
+			 * @param[in]  _x    Key of the element to be searched.
+			 *
+			 * @return     Where the found element is stored of -1, in case of
+			 *             error.
+			 */
 			int _search ( const Key & _x ) const
 			{
 				KeyComparator comp;
@@ -43,9 +62,10 @@ namespace ac
 			public:
 				
 				/**
-				 * @brief      { function_description }
+				 * @brief      Default constructor. Initializes dictionary,
 				 *
-				 * @param[in]  _MaxSz  The maximum size
+				 * @param[in]  _MaxSz  Size of the dictionary. Provided none,
+				 *                     default value is 50.
 				 */
 				DAL ( int _MaxSz = SIZE )
 					: mi_Length(0)
@@ -79,6 +99,18 @@ namespace ac
 					return mi_Length == 0;
 				}
 
+				/**
+				 * @brief      Given a key by the client, searches for its
+				 *             occurrence inside the dictionary and if found,
+				 *             removes it. Then, it takes the last element and
+				 *             inserts in the gap left by the removed element.
+				 *
+				 * @param[in]  _x    Key provided by the client to remove element.
+				 * @param      _s    Where the value of the element to be deleted
+				 *                   will be stored and used by the client.
+				 *
+				 * @return     True if able to remove element, false otherwise.
+				 */
 				bool remove ( const Key & _x, Data & _s )
 				{
 					if ( empty() ) return false;
@@ -97,7 +129,17 @@ namespace ac
 					mi_Length--;
 					return true;
 				}
-				
+
+				/**
+				 * @brief      Searches for the match on a key provided by the
+				 *             client.
+				 *
+				 * @param[in]  _x    Key provided by the client to search element.
+				 * @param      _s    Where the information about the found element
+				 *                   will be stored and used by the client.
+				 *
+				 * @return     True if able to find element. False otherwise.
+				 */
 				bool search ( const Key & _x, Data & _s ) const
 				{
 					if ( empty() ) return false;
@@ -106,7 +148,15 @@ namespace ac
 					_s = mpt_Data[found_position].info;
 					return true;
 				}
-				
+
+				/**
+				 * @brief      Inserts a new element inside the dictionary.
+				 *
+				 * @param[in]  _newKey   The key of the new element to be inserted.
+				 * @param[in]  _newInfo  The data associated to the key.
+				 *
+				 * @return     True if able to insert, false otherwise.
+				 */
 				bool insert ( const Key & _newKey, const Data & _newInfo )
 				{
 					// Checks if the dictionary can store new data
@@ -161,6 +211,18 @@ namespace ac
 					return curr_max;
 				}
 
+				/**
+				 * @brief      Given a key, iterates over the whole dictionary
+				 *             searching for the element which key is immediate
+				 *             successor of the one provided. Since this dictionary
+				 *             is not sorted, the search is linear.
+				 *
+				 * @param[in]  _x    Key provided by the user to find the successor.
+				 * @param      _y    Where the successor's key will be stored and
+				 *                   used by the client.
+				 *
+				 * @return     True if able to find successor. False otherwise.
+				 */
 				bool successor ( const Key & _x, Key & _y ) const
 				{
 					if ( mi_Length == 0 ) return false;
@@ -173,6 +235,7 @@ namespace ac
 					// If _x is equal to the max key, his successor would be out of the dictionary
 					if ( not comp(suc, _x) and not comp(_x, suc) ) return false;
 					
+					// Iterating over the dictionary searching the immediate successor
 					for( auto i(0); i != mi_Length; ++i )
 					{	
 						if ( comp( _x, mpt_Data[i].id ) and comp( mpt_Data[i].id, suc ) )
@@ -182,6 +245,19 @@ namespace ac
 					return true;
 				}
 
+				/**
+				 * @brief      Given a key, iterates over the whole dictionary
+				 *             searching for the element which key is immediate
+				 *             predecessor of the one provided. Since this
+				 *             dictionary is not sorted, the search is linear.
+				 *
+				 * @param[in]  _x    Key provided by the user to find the
+				 *                   predecessor.
+				 * @param      _y    Where the predecessor's key will be stored and
+				 *                   used by the client.
+				 *
+				 * @return     True if able to find predecessor. False otherwise.
+				 */
 				bool predecessor ( const Key _x, Key & _y ) const
 				{
 					if ( mi_Length == 0 ) return false;
@@ -203,6 +279,10 @@ namespace ac
 					return true;	
 				}
 
+				/**
+				 * @brief      Overloading stream operator to print the dictionary's
+				 *             elements.
+				 */
 				inline friend
 				std::ostream &operator<< ( std::ostream& _os, const DAL& _oList )
 				{
