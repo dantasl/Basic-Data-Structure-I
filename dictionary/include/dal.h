@@ -124,26 +124,42 @@ namespace ac
 				bool successor ( const Key & _x, Key & _y ) const
 				{
 					if ( mi_Length == 0 ) return false;
+					// Check if the provided key is in dictionary
+					if ( _search(_x) == -1 ) return false;
+					
 					KeyComparator comp;
-					Key curr_suc = _x;
+					Key suc = max();
+
+					// If _x is equal to the max key, his successor would be out of the dictionary
+					if ( not comp(suc, _x) and not comp(_x, suc) ) return false;
+					
 					for( auto i(0); i != mi_Length; ++i )
-					{
-						if ( not comp( curr_suc, mpt_Data[i].id ) ) curr_suc = mpt_Data[i].id;
+					{	
+						if ( comp( _x, mpt_Data[i].id ) and comp( mpt_Data[i].id, suc ) )
+							suc = mpt_Data[i].id;
 					}
-					_y = curr_suc;
+					_y = suc;
 					return true;
 				}
 
 				bool predecessor ( const Key _x, Key & _y ) const
 				{
 					if ( mi_Length == 0 ) return false;
+					// Check if the provided key is in dictionary
+					if ( _search(_x) == -1 ) return false;
+					
 					KeyComparator comp;
-					Key curr_pre = _x;
+					Key pre = min();
+
+					// If _x is equal to the min key, his predecessor would be out of the dictionary
+					if ( not comp(pre, _x) and not comp(_x, pre) ) return false;
+					
 					for( auto i(0); i != mi_Length; ++i )
 					{
-						if ( comp( curr_pre, mpt_Data[i].id ) ) curr_pre = mpt_Data[i].id;
+						if ( comp( mpt_Data[i].id, _x ) and comp( pre, mpt_Data[i].id ) )
+							pre = mpt_Data[i].id;
 					}
-					_y = curr_pre;
+					_y = pre;
 					return true;	
 				}
 
@@ -156,7 +172,7 @@ namespace ac
 							<< _oList.mpt_Data[i].info << "} ";
 					_os << "]";
 					return _os;		
-				} 
+				}
 	};
 }
 

@@ -1,6 +1,6 @@
-# Abstract Data Type - Implementing a Hash Table
+# Abstract Data Type - Implementing a Dictionary
 
-In the present repository I'm storing the codes created to implement a Hash Table.
+In the present repository I'm storing the codes created to implement a Dictionary.
 
 <b>Lucas Gomes Dantas</b> (<dantaslucas@ufrn.edu.br>), student in the <b>Basic Data Structure I</b> class of <b>Prof. Dr. Selan
 Rodrigues dos Santos</b> at <b>Federal University of Rio Grande do Norte</b>.
@@ -12,19 +12,23 @@ Rodrigues dos Santos</b> at <b>Federal University of Rio Grande do Norte</b>.
 * Type `make init` to create the project structure;
 * Type `make` to compile the project.
 
-There is already a driver testing some of the hash table's functions. If you want to run it, type: <code>./bin/hash_test</code>
+There is already a driver testing some of the hash table's functions. If you want to run it, type: <code>./bin/dictionary_test</code>
 
 ## Including and using library
 
-To use this library, you have to include the `hashtbl.h` into your application. To instantiate a hash table, do as following:
+Were implemented two types of dictionary, under `dal.h` and `dsal.h`. The first one stands for Dictionary with Array List and the elements are stored in a unsorted array. The second one stands for Dictionary with Sorted Array List and the elements are stored in a sorted array. 
 
-* `ac::HashTbl<KeyType, DataType, KeyHash, KeyEqual> hs`
+You may choose to use any of those two libraries. They both follow the same way to instantiate:
 
-Where `ac` is the namespace (stands for associative container), `<KeyType>` is the element's key, `DataType` is the value of the element, `KeyHash` is the functor to hash the key provided by the client (default function is std::hash),`KeyEqual` is the functor of comparison (default funtion is std::equal_to) and `hs` is the hash_table's name.
+* `ac::DAL<Key, Data, KeyComparator> dict`
+
+Where `ac` is the namespace (stands for associative container), `DAL` is the name of the class with unsorted array (can be replaced by `DSAL` if client wants to use the sorted version) ,`<Key>` is the element's key, `Data` is the value of the element, `KeyComparator` is the functor of comparison (default funtion is std::less) and `dict` is the dictionary's name.
 
 ## Possible errors and exceptions
 
 Errors, for this implementation, were treated in a very simple way. The functions will return a `false` when they're not able to perform their actions and a `true` when possible.
+
+Also, in some cases, there might be a `std::out_of_range`, throwed when the client tries to access min or max keys of empty dictionaries.
 
 ## License
 

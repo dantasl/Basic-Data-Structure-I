@@ -5,8 +5,6 @@
  * @brief File for DAL and DSAL classes tests .
  */
 
-// g++ -std=c++11 -Wall -pedantic -ansi driver_dictionary.cpp -o driver
-
 #include <iostream>   // cout, endl
 #include <cassert>    // assert()
 #include <algorithm>  // shuffle
@@ -14,6 +12,7 @@
 #include <iterator>   // std::begin(), std::end()
 
 #include "dal.h"
+#include "dsal.h"
 
 using namespace ac;
 
@@ -242,8 +241,7 @@ int main ( void )
             // go to the next key.
             key = next_key;
         }
-        //assert( key == i );
-        }/*
+        assert( key == i );
 
         key = dict.max();
         next_key = 0;
@@ -255,7 +253,7 @@ int main ( void )
             key = next_key;
         }
         assert( key == i );
-    } /**
+    }
 
 
     {
@@ -481,7 +479,7 @@ int main ( void )
             key = next_key;
         }
         assert( key == i );
-    } */
+    }
 
     std::cout << ">>> Passed the unit tests successfully!\n";
     return EXIT_SUCCESS;

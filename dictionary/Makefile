@@ -32,7 +32,7 @@ dictionary_test: $(OBJ_DIR)/main.o
 	@echo "+++ [Executable dictionary_test created in $(BIN_DIR)] +++"
 	@echo "============="
 
-$(OBJ_DIR)/main.o: $(SRC_DIR)/driver_dictionary.cpp $(INC_DIR)/dal.h
+$(OBJ_DIR)/main.o: $(SRC_DIR)/driver_dictionary.cpp $(INC_DIR)/dal.h $(INC_DIR)/dsal.h
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 doxy:
